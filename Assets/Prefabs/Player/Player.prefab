@@ -278,8 +278,13 @@ MonoBehaviour:
   playerSpeed: 7
   sprintSpeed: 5
   groundDrag: 5
-  playerHeight: 2
+  jumpForce: 12
+  jumpCooldown: 0.25
+  airMultiplier: 0.5
+  jumpKey: 32
+  playerHeight: 5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  grounded: 0
   orientation: {fileID: 5447516764409926624}
