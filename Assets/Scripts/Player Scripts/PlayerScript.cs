@@ -14,7 +14,14 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     //Variables
     [Header("Movement")]
-    private float playerSpeed = 5;
+    private float playerSpeed = 2;
+    public float sprintSpeed = 5;
+    public float groundDrag;
+
+    [Header("Ground Check")]
+    public float playerHeight;
+    public LayerMask whatIsGround;
+    bool grounded;
 
     public Transform orientation;
 
@@ -42,7 +49,21 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Ground Check
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+
         MyInput();
+        SpeedControl();
+
+        if (grounded)
+        {
+            rb.drag = groundDrag;
+        }
+        else
+        {
+            rb.drag = 0;
+
+        }
     }
 
     private void FixedUpdate()
@@ -52,6 +73,7 @@ public class PlayerScript : MonoBehaviour
 
     private void MyInput()
     {
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
     }
@@ -65,5 +87,19 @@ public class PlayerScript : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         rb.AddForce(moveDirection.normalized * playerSpeed * 10f, ForceMode.Force);
+    }
+
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        //Limit Velocity if needed
+        if (flatVel.magnitude > playerSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * playerSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+
+        }
+
     }
 }
