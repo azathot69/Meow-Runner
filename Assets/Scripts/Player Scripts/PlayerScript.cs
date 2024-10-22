@@ -11,6 +11,9 @@ public class PlayerScript : MonoBehaviour
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction jumpAction;
+    InputAction sprintAction;
+
+    public bool sprinting = false;
 
     //Variables
 
@@ -59,7 +62,9 @@ public class PlayerScript : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions.FindAction("Move");
-        //jumpAction = playerInput.actions.FindAction("Jump");
+        jumpAction = playerInput.actions.FindAction("Jump");
+        sprintAction = playerInput.actions.FindAction("Sprint");
+
 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -75,6 +80,8 @@ public class PlayerScript : MonoBehaviour
 
         MyInput();
         SpeedControl();
+
+
 
         //Handle Drag
         if (grounded)
@@ -115,34 +122,69 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     void MovePlayer()
     {
-        //Calculate Movement Direction
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        //Local Varibale
+        var mySpeed = 0f;   //Stores the speed used
 
+        //Check if Sprinting
+        if (!sprinting){
+            mySpeed = playerSpeed;
+        }
+        else
+        {
+            mySpeed = sprintSpeed;
+        }
+
+        //Calculate Movement Direction
+        //moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        var input = moveAction.ReadValue<Vector2>();
+        moveDirection.x = input.x;
+        moveDirection.z = input.y;
 
         //On Ground
         if (grounded)
         {
-            rb.AddForce(moveDirection.normalized * playerSpeed * 10f, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * mySpeed * 10f, ForceMode.Force);
+
         }else if (!grounded)
         {
-            rb.AddForce(moveDirection.normalized * playerSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * mySpeed * 10f * airMultiplier, ForceMode.Force);
         }
     }
 
+    /// <summary>
+    /// Fixes the player's maximum speed
+    /// </summary>
     private void SpeedControl()
     {
+        //Variable
+        var myMaxSpeed = 0f;
+
+        //Check if Sprinting
+        if (!sprinting)
+        {
+            myMaxSpeed = playerSpeed;
+        }
+        else
+        {
+            myMaxSpeed = sprintSpeed;
+        }
+
+
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         //Limit Velocity if needed
-        if (flatVel.magnitude > playerSpeed)
+        if (flatVel.magnitude > myMaxSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * playerSpeed;
+            Vector3 limitedVel = flatVel.normalized * myMaxSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
 
         }
 
     }
 
+    /// <summary>
+    /// Makes the player jump
+    /// </summary>
     private void Jump()
     {
         Debug.Log("Jumping");
@@ -152,6 +194,9 @@ public class PlayerScript : MonoBehaviour
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
+    /// <summary>
+    /// Allows the player to jump again when touching the ground
+    /// </summary>
     private void ResetJump()
     {
         readyToJump = true;
