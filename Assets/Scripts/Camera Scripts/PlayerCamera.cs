@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
+    [Header("Camera Movement")]
     public float sensX;
     public float sensY;
 
     public Transform orientation;
     public float xRotation;
     public float yRotation;
+
+
 
     private void Start()
     {
