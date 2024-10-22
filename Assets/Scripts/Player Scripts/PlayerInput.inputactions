@@ -27,7 +27,7 @@
                     "name": "Sprint",
                     "type": "Value",
                     "id": "e12f864b-fde8-467d-83c2-094f0c03c025",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Integer",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true

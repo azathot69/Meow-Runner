@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 /// <summary>
 /// Dictates Player Behavior
@@ -33,6 +34,8 @@ public class PlayerScript : MonoBehaviour
     #region Keybinds
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode sprintKeyL = KeyCode.LeftShift;
+    public KeyCode sprintKeyR = KeyCode.RightShift;
 
     #endregion
 
@@ -101,9 +104,15 @@ public class PlayerScript : MonoBehaviour
 
     private void MyInput()
     {
-
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        
+        if (Input.GetKey(sprintKeyL) || Input.GetKey(sprintKeyR))
+        {
+            sprinting = true;
+        }
+        else
+        {
+            sprinting = false;
+        }
 
         //When to jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
@@ -135,7 +144,6 @@ public class PlayerScript : MonoBehaviour
         }
 
         //Calculate Movement Direction
-        //moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         var input = moveAction.ReadValue<Vector2>();
         moveDirection.x = input.x;
         moveDirection.z = input.y;
