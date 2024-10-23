@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 /// <summary>
@@ -15,6 +16,11 @@ public class PlayerScript : MonoBehaviour
     InputAction sprintAction;
 
     public bool sprinting = false;
+    public int lives = 1;
+    public float deathYLevel = -10f;
+    private Vector3 startPos;
+
+
 
     //Variables
 
@@ -124,6 +130,11 @@ public class PlayerScript : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
 
         }
+
+        if (transform.position.y <= deathYLevel)
+        {
+            Respawn();
+        }
     }
 
     /// <summary>
@@ -208,6 +219,15 @@ public class PlayerScript : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+
+    }
+
+    private void Respawn()
+    {
+        //teleport the player to the starting position
+        //cause the player to lose a life
+        lives--;
+        transform.position = startPos;
 
     }
 }
