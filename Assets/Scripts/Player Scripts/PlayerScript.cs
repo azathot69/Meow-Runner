@@ -10,17 +10,29 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 /// </summary>
 public class PlayerScript : MonoBehaviour
 {
+    
     PlayerInput playerInput;
     InputAction moveAction;
-    InputAction jumpAction;
+    public bool sprinting = false;
     InputAction sprintAction;
 
-    public bool sprinting = false;
+    [Header("Jumping")]
+    InputAction jumpAction;
+
+    [Header("Slope Handling")]
+    public float maxSlopeAngle;
+    private RaycastHit slopeHit;
+    [SerializeField]
+    private bool exitingSlope;
+    public bool ImOnSlope;
+
+
+    [Header("Climbing")]
+
+    [Header("Respawning")]
     public int lives = 1;
     public float deathYLevel = -10f;
     private Vector3 startPos;
-
-
 
     //Variables
 
@@ -144,6 +156,7 @@ public class PlayerScript : MonoBehaviour
     {
         //Local Varibale
         var mySpeed = 0f;   //Stores the speed used
+        
 
         //Check if Sprinting
         if (!sprinting){
@@ -159,6 +172,17 @@ public class PlayerScript : MonoBehaviour
         moveDirection.x = input.x;
         moveDirection.z = input.y;
 
+        //if On Slope
+        if (OnSlope() && !exitingSlope)
+        {
+            rb.AddForce(GetSlopeMoveDirection() * mySpeed * 20f, ForceMode.Force);
+
+            if (rb.velocity.y > 0f)
+            {
+                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+            }
+        }
+
         //On Ground
         if (grounded)
         {
@@ -168,6 +192,9 @@ public class PlayerScript : MonoBehaviour
         {
             rb.AddForce(moveDirection.normalized * mySpeed * 10f * airMultiplier, ForceMode.Force);
         }
+
+        //Turn off fravity while on slope
+        rb.useGravity = !OnSlope();
     }
 
     /// <summary>
@@ -188,17 +215,26 @@ public class PlayerScript : MonoBehaviour
             myMaxSpeed = sprintSpeed;
         }
 
-
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        //Limit Velocity if needed
-        if (flatVel.magnitude > myMaxSpeed)
+        //Limit Speed on slope
+        if (OnSlope() && !exitingSlope)
         {
-            Vector3 limitedVel = flatVel.normalized * myMaxSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
-
+            if (rb.velocity.magnitude > myMaxSpeed)
+            {
+                rb.velocity = rb.velocity.normalized * myMaxSpeed;
+            }
         }
+        else
+        {
+            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
+            //Limit Velocity if needed
+            if (flatVel.magnitude > myMaxSpeed)
+            {
+                Vector3 limitedVel = flatVel.normalized * myMaxSpeed;
+                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+
+            }
+        }
     }
 
     /// <summary>
@@ -206,6 +242,8 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     private void Jump()
     {
+        exitingSlope = true;
+
         Debug.Log("Jumping");
         //Reset Y Velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -218,8 +256,9 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     private void ResetJump()
     {
-        readyToJump = true;
+        exitingSlope = false;
 
+        readyToJump = true;
     }
 
     private void Respawn()
@@ -229,5 +268,31 @@ public class PlayerScript : MonoBehaviour
         lives--;
         transform.position = startPos;
 
+    }
+
+    /// <summary>
+    /// Check if the player is on the slope
+    /// </summary>
+    /// <returns></returns>
+    private bool OnSlope()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        {
+            ImOnSlope = true;
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle < maxSlopeAngle && angle != 0;
+            
+        }
+        ImOnSlope = false;
+        return false;
+    }
+
+    /// <summary>
+    /// Move in direction of slope
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 GetSlopeMoveDirection()
+    {
+        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 }
