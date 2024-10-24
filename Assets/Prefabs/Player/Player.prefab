@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 968259719083207063}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.21, y: -0.33565366, z: -1.4684961}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -275,6 +275,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf47617f24e45e4fbef65a5b763deaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprinting: 0
+  maxSlopeAngle: 0
+  exitingSlope: 0
+  ImOnSlope: 0
+  lives: 1
+  deathYLevel: -10
   playerSpeed: 7
   sprintSpeed: 5
   groundDrag: 5
@@ -283,6 +289,8 @@ MonoBehaviour:
   airMultiplier: 0.5
   readyToJump: 0
   jumpKey: 32
+  sprintKeyL: 304
+  sprintKeyR: 303
   playerHeight: 3
   whatIsGround:
     serializedVersion: 2

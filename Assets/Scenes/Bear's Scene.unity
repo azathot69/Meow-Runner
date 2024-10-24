@@ -893,6 +893,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1617873429330247897, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617873429330247897, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617873429330247897, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: jumpForce
       value: 12
@@ -919,7 +931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: playerHeight
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: airMultiplier
@@ -927,7 +939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: maxSlopeAngle
-      value: 50
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: whatIsGround.m_Bits

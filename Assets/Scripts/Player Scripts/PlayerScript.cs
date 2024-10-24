@@ -179,7 +179,7 @@ public class PlayerScript : MonoBehaviour
 
             if (rb.velocity.y > 0f)
             {
-                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+                rb.AddForce(Vector3.down * 160f, ForceMode.Force);
             }
         }
 
@@ -276,10 +276,13 @@ public class PlayerScript : MonoBehaviour
     /// <returns></returns>
     private bool OnSlope()
     {
+        //Debug.DrawRay(rb.transform.position, Vector3.down, Color.green);
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
+            
             ImOnSlope = true;
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+
             return angle < maxSlopeAngle && angle != 0;
             
         }
@@ -293,6 +296,7 @@ public class PlayerScript : MonoBehaviour
     /// <returns></returns>
     private Vector3 GetSlopeMoveDirection()
     {
+        Debug.DrawRay(transform.position, Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized, Color.green);
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 }
