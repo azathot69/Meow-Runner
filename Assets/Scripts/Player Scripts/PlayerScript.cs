@@ -189,8 +189,8 @@ public class PlayerScript : MonoBehaviour
         moveDirection.x = input.x;
         moveDirection.z = input.y;
 
-        Debug.Log("X: " + input.x);
-        Debug.Log("Y: " + input.y);
+        //Debug.Log("X: " + input.x);
+        //Debug.Log("Y: " + input.y);
 
         /*
         switch (moveDirection.x)
@@ -229,7 +229,7 @@ public class PlayerScript : MonoBehaviour
         //if On Slope
         if (OnSlope() && !exitingSlope)
         {
-            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
+            rb.AddForce(GetSlopeMoveDirection(moveDirection) * moveSpeed * 20f, ForceMode.Force);
 
             if (rb.velocity.y > 0)
             {
@@ -285,7 +285,7 @@ public class PlayerScript : MonoBehaviour
     {
         exitingSlope = true;
 
-        Debug.Log("Jumping");
+        //Debug.Log("Jumping");
         //Reset Y Velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
@@ -317,7 +317,7 @@ public class PlayerScript : MonoBehaviour
     /// Check if the player is on the slope
     /// </summary>
     /// <returns></returns>
-    private bool OnSlope()
+    public bool OnSlope()
     {
         //Debug.DrawRay(rb.transform.position, Vector3.down, Color.green);
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
@@ -341,9 +341,9 @@ public class PlayerScript : MonoBehaviour
     /// Move in direction of slope
     /// </summary>
     /// <returns></returns>
-    private Vector3 GetSlopeMoveDirection()
+    public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
         //Debug.DrawRay(transform.position, Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized, Color.green);
-        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+        return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 }
