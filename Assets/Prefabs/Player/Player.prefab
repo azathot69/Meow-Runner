@@ -171,7 +171,7 @@ MonoBehaviour:
   maxSlopeAngle: 0
   exitingSlope: 0
   ImOnSlope: 0
-  lives: 1
+  lives: 9
   deathYLevel: -10
   state: 0
   playerSpeed: 7

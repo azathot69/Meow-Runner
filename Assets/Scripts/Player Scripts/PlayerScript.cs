@@ -4,16 +4,22 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEditor.Timeline.TimelinePlaybackControls;
+using TMPro;
 
 /// <summary>
 /// Dictates Player Behavior
 /// </summary>
 public class PlayerScript : MonoBehaviour
 {
-    
+    #region Varibles
+    [Header("References")]
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction sprintAction;
+
+    [Header("UI")]
+    [SerializeField] private TMP_Text livesText;
+    
 
     [Header("Jumping")]
     InputAction jumpAction;
@@ -25,11 +31,8 @@ public class PlayerScript : MonoBehaviour
     private bool exitingSlope;
     public bool ImOnSlope;
 
-
-    [Header("Climbing")]
-
     [Header("Respawning")]
-    public int lives = 1;
+    public int lives = 9;
     public float deathYLevel = -10f;
     private Vector3 startPos;
 
@@ -45,7 +48,7 @@ public class PlayerScript : MonoBehaviour
 
     //Variables
 
-    #region Movement
+    
     [Header("Movement")]
     public float playerSpeed = 2;
     public float sprintSpeed = 5;
@@ -61,17 +64,13 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField]
     bool readyToJump;
-    #endregion
 
-    #region Keybinds
     //[Header("Keybinds")]
     private KeyCode jumpKey = KeyCode.Space;
     private KeyCode sprintKeyL = KeyCode.LeftShift;
     private KeyCode sprintKeyR = KeyCode.RightShift;
 
-    #endregion
 
-    #region Ground Check
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
@@ -101,6 +100,8 @@ public class PlayerScript : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        
     }
 
 
@@ -108,6 +109,8 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        livesText.text = "Lives: " + lives;
+
         //Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
@@ -308,7 +311,16 @@ public class PlayerScript : MonoBehaviour
     {
         //teleport the player to the starting position
         //cause the player to lose a life
-        lives--;
+        if (lives != 0)
+        {
+            lives--;
+        }
+        else
+        {
+            //Go to Game Over
+        }
+
+        
         transform.position = startPos;
 
     }
