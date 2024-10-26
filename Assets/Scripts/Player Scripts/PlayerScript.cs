@@ -13,7 +13,6 @@ public class PlayerScript : MonoBehaviour
     
     PlayerInput playerInput;
     InputAction moveAction;
-    public bool sprinting = false;
     InputAction sprintAction;
 
     [Header("Jumping")]
@@ -34,12 +33,23 @@ public class PlayerScript : MonoBehaviour
     public float deathYLevel = -10f;
     private Vector3 startPos;
 
+    [Header("Movement State")]
+    public movementState state;
+
+    public enum movementState
+    {
+        WALK,
+        SPRINT,
+        AIR
+    }
+
     //Variables
 
     #region Movement
     [Header("Movement")]
     public float playerSpeed = 2;
     public float sprintSpeed = 5;
+    public float moveSpeed;
     public float groundDrag;
 
     public float jumpForce;
@@ -50,10 +60,10 @@ public class PlayerScript : MonoBehaviour
     #endregion
 
     #region Keybinds
-    [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode sprintKeyL = KeyCode.LeftShift;
-    public KeyCode sprintKeyR = KeyCode.RightShift;
+    //[Header("Keybinds")]
+    private KeyCode jumpKey = KeyCode.Space;
+    private KeyCode sprintKeyL = KeyCode.LeftShift;
+    private KeyCode sprintKeyR = KeyCode.RightShift;
 
     #endregion
 
@@ -101,7 +111,7 @@ public class PlayerScript : MonoBehaviour
 
         MyInput();
         SpeedControl();
-
+        StateHandler();
 
 
         //Handle Drag
@@ -121,17 +131,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     private void MyInput()
-    {
-        
-        if (Input.GetKey(sprintKeyL) || Input.GetKey(sprintKeyR))
-        {
-            sprinting = true;
-        }
-        else
-        {
-            sprinting = false;
-        }
-
+    {  
         //When to jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
@@ -149,24 +149,36 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //Handle the different states of the player
+    public void StateHandler()
+    {
+        // Sprinting
+        if (grounded && (Input.GetKey(sprintKeyL) || Input.GetKey(sprintKeyR)))
+        {
+            state = movementState.SPRINT;
+            moveSpeed = sprintSpeed;
+        }
+
+        //Walking
+        else if (grounded)
+        {
+            state = movementState.WALK;
+            moveSpeed = playerSpeed;
+        }
+
+        //In the Air
+        else
+        {
+            state = movementState.AIR;
+        }
+
+    }
+
     /// <summary>
     /// Moves the player around
     /// </summary>
     void MovePlayer()
     {
-        //Local Varibale
-        var mySpeed = 0f;   //Stores the speed used
-        
-
-        //Check if Sprinting
-        if (!sprinting){
-            mySpeed = playerSpeed;
-        }
-        else
-        {
-            mySpeed = sprintSpeed;
-        }
-
         //Calculate Movement Direction
         var input = moveAction.ReadValue<Vector2>();
         moveDirection.x = input.x;
@@ -175,7 +187,7 @@ public class PlayerScript : MonoBehaviour
         //if On Slope
         if (OnSlope() && !exitingSlope)
         {
-            rb.AddForce(GetSlopeMoveDirection() * mySpeed * 20f, ForceMode.Force);
+            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
 
             if (rb.velocity.y > 0f)
             {
@@ -186,11 +198,11 @@ public class PlayerScript : MonoBehaviour
         //On Ground
         if (grounded)
         {
-            rb.AddForce(moveDirection.normalized * mySpeed * 10f, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         }else if (!grounded)
         {
-            rb.AddForce(moveDirection.normalized * mySpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
 
         //Turn off fravity while on slope
@@ -202,25 +214,12 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     private void SpeedControl()
     {
-        //Variable
-        var myMaxSpeed = 0f;
-
-        //Check if Sprinting
-        if (!sprinting)
-        {
-            myMaxSpeed = playerSpeed;
-        }
-        else
-        {
-            myMaxSpeed = sprintSpeed;
-        }
-
         //Limit Speed on slope
         if (OnSlope() && !exitingSlope)
         {
-            if (rb.velocity.magnitude > myMaxSpeed)
+            if (rb.velocity.magnitude > moveSpeed)
             {
-                rb.velocity = rb.velocity.normalized * myMaxSpeed;
+                rb.velocity = rb.velocity.normalized * moveSpeed;
             }
         }
         else
@@ -228,9 +227,9 @@ public class PlayerScript : MonoBehaviour
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
             //Limit Velocity if needed
-            if (flatVel.magnitude > myMaxSpeed)
+            if (flatVel.magnitude > moveSpeed)
             {
-                Vector3 limitedVel = flatVel.normalized * myMaxSpeed;
+                Vector3 limitedVel = flatVel.normalized * moveSpeed;
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
 
             }
