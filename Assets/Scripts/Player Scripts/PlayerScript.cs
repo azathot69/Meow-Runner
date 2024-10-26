@@ -55,6 +55,10 @@ public class PlayerScript : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+
+    float horizontalInput;
+    float verticalInput;
+
     [SerializeField]
     bool readyToJump;
     #endregion
@@ -76,12 +80,10 @@ public class PlayerScript : MonoBehaviour
 
     public Transform orientation;
 
-    private float horizontalInput;
-    private float verticalInput;
 
     Vector3 moveDirection;
     Rigidbody rb;
-
+    public GameObject catBody;
 
     #endregion
 
@@ -107,7 +109,7 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         //Ground Check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
         MyInput();
         SpeedControl();
@@ -131,7 +133,10 @@ public class PlayerScript : MonoBehaviour
     }
 
     private void MyInput()
-    {  
+    {
+        //horizontalInput = Input.GetAxisRaw("Horizontal");
+        //verticalInput = Input.GetAxisRaw("Vertical");
+
         //When to jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
@@ -184,14 +189,51 @@ public class PlayerScript : MonoBehaviour
         moveDirection.x = input.x;
         moveDirection.z = input.y;
 
+        Debug.Log("X: " + input.x);
+        Debug.Log("Y: " + input.y);
+
+        /*
+        switch (moveDirection.x)
+        {
+            case 0:
+
+                break;
+
+            case 1:
+                catBody.transform.rotation = Quaternion.Euler(new Vector3(0, 45, 0));
+                break;
+
+            case -1:
+                catBody.transform.rotation = Quaternion.Euler(new Vector3(0, -45, 0));
+                break;
+        }
+
+        switch (moveDirection.y)
+        {
+            case 0:
+
+                break;
+
+            case 1:
+                catBody.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
+                break;
+
+            case -1:
+                catBody.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
+                break;
+        }
+        */
+
+        //moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
         //if On Slope
         if (OnSlope() && !exitingSlope)
         {
             rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
 
-            if (rb.velocity.y > 0f)
+            if (rb.velocity.y > 0)
             {
-                rb.AddForce(Vector3.down * 160f, ForceMode.Force);
+                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
             }
         }
 
@@ -248,6 +290,8 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+        //rb.AddForce(Vector3.down * 200f, ForceMode.Force);
     }
 
     /// <summary>
@@ -282,6 +326,10 @@ public class PlayerScript : MonoBehaviour
             ImOnSlope = true;
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
 
+            //Debug.Log("Angle: " + angle);
+
+
+
             return angle < maxSlopeAngle && angle != 0;
             
         }
@@ -295,7 +343,7 @@ public class PlayerScript : MonoBehaviour
     /// <returns></returns>
     private Vector3 GetSlopeMoveDirection()
     {
-        Debug.DrawRay(transform.position, Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized, Color.green);
+        //Debug.DrawRay(transform.position, Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized, Color.green);
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 }
