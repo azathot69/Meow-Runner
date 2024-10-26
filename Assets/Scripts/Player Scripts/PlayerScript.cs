@@ -35,6 +35,7 @@ public class PlayerScript : MonoBehaviour
     public int lives = 9;
     public float deathYLevel = -10f;
     private Vector3 startPos;
+    private bool hasDied = false;
 
     [Header("Movement State")]
     public movementState state;
@@ -133,6 +134,12 @@ public class PlayerScript : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+
+        if (transform.position.y <= deathYLevel)
+        {
+            hasDied = true;
+            Respawn();
+        }
     }
 
     private void MyInput()
@@ -151,10 +158,7 @@ public class PlayerScript : MonoBehaviour
 
         }
 
-        if (transform.position.y <= deathYLevel)
-        {
-            Respawn();
-        }
+        
     }
 
     //Handle the different states of the player
@@ -311,14 +315,17 @@ public class PlayerScript : MonoBehaviour
     {
         //teleport the player to the starting position
         //cause the player to lose a life
-        if (lives != 0)
+        if (hasDied)
         {
             lives--;
+            hasDied = false;
+            
         }
         else
         {
-            //Go to Game Over
+            //Go to game over
         }
+
 
         
         transform.position = startPos;
