@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 5280415802761751386}
   - component: {fileID: 4666891852175496679}
   - component: {fileID: 3962823901743815485}
+  - component: {fileID: 9082413904329329913}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -190,6 +191,28 @@ MonoBehaviour:
   grounded: 0
   orientation: {fileID: 5447516764409926624}
   catBody: {fileID: 0}
+--- !u!114 &9082413904329329913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097349826680459598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac9f55402428b446a47ecedaf99f341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 5447516764409926624}
+  rb: {fileID: 5280415802761751386}
+  pm: {fileID: 3962823901743815485}
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 0
+  climbSpeed: 10
+  maxClimbTime: 0.75
+  detectionLength: 0.7
+  sphereCastRadius: 0.25
 --- !u!1001 &7232134659549237480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275,7 +298,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.6
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.75, y: 0, z: 0}
 --- !u!4 &8735235200892524597 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2117956287069604061, guid: 624a461f3273f67439d8226d98490fb4, type: 3}

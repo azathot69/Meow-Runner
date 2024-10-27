@@ -76,8 +76,7 @@ public class PlayerScript : MonoBehaviour
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
-    [SerializeField]
-    bool grounded;
+    public bool grounded;
 
     public Transform orientation;
 
@@ -204,11 +203,12 @@ public class PlayerScript : MonoBehaviour
         //if On Slope
         if (OnSlope() && !exitingSlope)
         {
-            rb.AddForce(GetSlopeMoveDirection(moveDirection) * moveSpeed * 20f, ForceMode.Force);
+            //Move player in direction of slope
+            rb.AddForce(GetSlopeMoveDirection(moveDirection) * moveSpeed * 10f, ForceMode.Force);
 
             if (rb.velocity.y > 0)
             {
-                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+                rb.AddForce(Vector3.down * 160f, ForceMode.Force);
             }
         }
 
