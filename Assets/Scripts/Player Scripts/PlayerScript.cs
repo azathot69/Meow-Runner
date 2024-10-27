@@ -88,9 +88,6 @@ public class PlayerScript : MonoBehaviour
 
     #endregion
 
-    
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -200,37 +197,7 @@ public class PlayerScript : MonoBehaviour
         //Debug.Log("X: " + input.x);
         //Debug.Log("Y: " + input.y);
 
-        /*
-        switch (moveDirection.x)
-        {
-            case 0:
-
-                break;
-
-            case 1:
-                catBody.transform.rotation = Quaternion.Euler(new Vector3(0, 45, 0));
-                break;
-
-            case -1:
-                catBody.transform.rotation = Quaternion.Euler(new Vector3(0, -45, 0));
-                break;
-        }
-
-        switch (moveDirection.y)
-        {
-            case 0:
-
-                break;
-
-            case 1:
-                catBody.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
-                break;
-
-            case -1:
-                catBody.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
-                break;
-        }
-        */
+        
 
         //moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -268,9 +235,8 @@ public class PlayerScript : MonoBehaviour
         if (OnSlope() && !exitingSlope)
         {
             if (rb.velocity.magnitude > moveSpeed)
-            {
                 rb.velocity = rb.velocity.normalized * moveSpeed;
-            }
+            
         }
         else
         {
@@ -320,17 +286,12 @@ public class PlayerScript : MonoBehaviour
         {
             lives--;
             hasDied = false;
-            
         }
         else
         {
             //Go to game over
         }
-
-
-        
         transform.position = startPos;
-
     }
 
     /// <summary>
@@ -342,16 +303,11 @@ public class PlayerScript : MonoBehaviour
         //Debug.DrawRay(rb.transform.position, Vector3.down, Color.green);
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
-            
             ImOnSlope = true;
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
 
             //Debug.Log("Angle: " + angle);
-
-
-
             return angle < maxSlopeAngle && angle != 0;
-            
         }
         ImOnSlope = false;
         return false;
@@ -363,7 +319,7 @@ public class PlayerScript : MonoBehaviour
     /// <returns></returns>
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
-        //Debug.DrawRay(transform.position, Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized, Color.green);
+        Debug.DrawRay(transform.position, Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized, Color.blue);
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 }

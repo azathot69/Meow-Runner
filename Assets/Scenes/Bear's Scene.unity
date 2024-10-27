@@ -421,8 +421,8 @@ Transform:
   m_GameObject: {fileID: 958421544}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.3, y: -2.0399997, z: -0.1}
-  m_LocalScale: {x: 27.31804, y: 0.21004638, z: 28.310698}
+  m_LocalPosition: {x: -67.1, y: -2.0399997, z: -0.1}
+  m_LocalScale: {x: 102.58198, y: 0.21004638, z: 28.310698}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -809,7 +809,7 @@ Transform:
   m_GameObject: {fileID: 1246167624}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.36836794, w: 0.9296801}
-  m_LocalPosition: {x: 22.57, y: 4.29, z: 0.4}
+  m_LocalPosition: {x: 19.8, y: 4.29, z: 0.4}
   m_LocalScale: {x: 27.31804, y: 0.21004638, z: 28.310698}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -977,6 +977,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 464381356166703340, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1617873429330247897, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1003,7 +1007,7 @@ PrefabInstance:
       objectReference: {fileID: 1065608084}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: jumpForce
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: livesText
@@ -1011,7 +1015,7 @@ PrefabInstance:
       objectReference: {fileID: 1277431470}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: groundDrag
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: deathYLevel
@@ -1019,7 +1023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: playerSpeed
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: readyToJump
@@ -1027,7 +1031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: sprintSpeed
-      value: 12
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: jumpCooldown
@@ -1035,7 +1039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: playerHeight
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3962823901743815485, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: airMultiplier
