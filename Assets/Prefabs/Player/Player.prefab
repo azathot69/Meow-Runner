@@ -211,6 +211,7 @@ MonoBehaviour:
     m_Bits: 0
   climbSpeed: 10
   maxClimbTime: 0.75
+  climbing: 0
   detectionLength: 0.7
   sphereCastRadius: 0.25
 --- !u!1001 &7232134659549237480

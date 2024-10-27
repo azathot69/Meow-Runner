@@ -90,6 +90,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //catBody.transform.
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions.FindAction("Move");
         jumpAction = playerInput.actions.FindAction("Jump");
@@ -116,6 +117,12 @@ public class PlayerScript : MonoBehaviour
         SpeedControl();
         StateHandler();
 
+        //Change Direction
+        if (moveDirection != Vector3.zero)
+        {
+            catBody.transform.forward = (moveDirection);
+            
+        }
 
         //Handle Drag
         if (grounded)
@@ -190,13 +197,16 @@ public class PlayerScript : MonoBehaviour
     {
         //Calculate Movement Direction
         var input = moveAction.ReadValue<Vector2>();
+        
         moveDirection.x = input.x;
         moveDirection.z = input.y;
+
+        moveDirection.Normalize();
 
         //Debug.Log("X: " + input.x);
         //Debug.Log("Y: " + input.y);
 
-        
+
 
         //moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -208,7 +218,7 @@ public class PlayerScript : MonoBehaviour
 
             if (rb.velocity.y > 0)
             {
-                rb.AddForce(Vector3.down * 160f, ForceMode.Force);
+                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
             }
         }
 
