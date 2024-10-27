@@ -58,6 +58,7 @@ public class PlayerScript : MonoBehaviour
 
     public float jumpForce;
     public float jumpCooldown;
+    //public float gravity = 200f;
     public float airMultiplier;
 
     float horizontalInput;
@@ -113,7 +114,7 @@ public class PlayerScript : MonoBehaviour
         livesText.text = "Lives: " + lives;
 
         //Ground Check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
         MyInput();
         SpeedControl();
@@ -155,7 +156,7 @@ public class PlayerScript : MonoBehaviour
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
-
+            
         }
 
         
@@ -298,7 +299,7 @@ public class PlayerScript : MonoBehaviour
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
-        //rb.AddForce(Vector3.down * 200f, ForceMode.Force);
+        //rb.AddForce(Vector3.down * gravity, ForceMode.Force);
     }
 
     /// <summary>
