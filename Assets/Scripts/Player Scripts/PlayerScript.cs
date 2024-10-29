@@ -23,6 +23,9 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Jumping")]
     InputAction jumpAction;
+    public float jumpForce;
+    public float jumpCooldown;
+    public float airMultiplier;
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
@@ -56,10 +59,7 @@ public class PlayerScript : MonoBehaviour
     public float moveSpeed;
     public float groundDrag;
 
-    public float jumpForce;
-    public float jumpCooldown;
-    //public float gravity = 200f;
-    public float airMultiplier;
+
 
     float horizontalInput;
     float verticalInput;
@@ -67,7 +67,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     bool readyToJump;
 
-    //[Header("Keybinds")]
+    [Header("Keybinds")]
     private KeyCode jumpKey = KeyCode.Space;
     private KeyCode sprintKeyL = KeyCode.LeftShift;
     private KeyCode sprintKeyR = KeyCode.RightShift;
