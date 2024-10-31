@@ -23,16 +23,20 @@ public class MainMenu : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (GameIsPaused == true)
+			
+            if (GameIsPaused == true)
 			{
 				Resume();
-			}
-			else
+            }
+            else
 			{
 				Pause();
-			}
-		}
-	}
+            }
+			
+        }
+
+
+    }
 
 	// Will resume the game where you last were
 	public void Resume ()
@@ -40,18 +44,21 @@ public class MainMenu : MonoBehaviour
 		pauseMenuUI.SetActive(false);
 		Time.timeScale = 1f;
 		GameIsPaused = false;
-	}
+        Cursor.visible = false;
 
-	// Will Pause the whole game
-	public void Pause ()
+    }
+
+    // Will Pause the whole game
+    public void Pause ()
 	{
 		pauseMenuUI.SetActive(true);
 		Time.timeScale = 0f;
 		GameIsPaused = true;
-	}
-	
-	// Loading the Main Menu
-	public void LoadMenu ()
+        Cursor.visible = true;
+    }
+
+    // Loading the Main Menu
+    public void LoadMenu ()
 	{
 		Time.timeScale = 1f;
 		SceneManager.LoadScene(0);
