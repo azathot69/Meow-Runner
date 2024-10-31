@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8298378747018783928}
   - component: {fileID: 3131245699535886962}
   - component: {fileID: 1497087439989179988}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wallrun wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4, y: 3.37, z: 12.73}
-  m_LocalScale: {x: 1, y: 12.496, z: 15.525101}
+  m_LocalScale: {x: 1, y: 26.796421, z: 15.525101}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
