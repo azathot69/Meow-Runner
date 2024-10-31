@@ -16,6 +16,13 @@ public class Climbing : MonoBehaviour
     public float maxClimbTime;
     private float climbTimer;
 
+    [Header("Climb Jumping")]
+    public float climbJumpUpForce;
+    public float climbJumpBackForce;
+
+    public KeyCode jumpKey = KeyCode.Space;
+    public int climbJumps;
+    private int climbJumpsLeft;
 
     public bool climbing;
 
@@ -25,22 +32,42 @@ public class Climbing : MonoBehaviour
 
     private RaycastHit frontWallHit;
     private bool wallFront;
+
+    private Transform lastWall;
+    private Vector3 lastWallNormal;
+    public float miniWallNormalAngleChange;
+
+    public float wallCheckDistance;
+    public float minJumpHeight;
+    private RaycastHit leftWallhit;
+    private RaycastHit rightWallhit;
+    bool wallRight;
+    bool wallLeft;
+
+    [Header("Exiting Wall")]
+    public bool exitingWall;
+    public float exitWallTime;
+    private float exitWallTimer;
+
     #endregion
 
     private void Update()
     {
         WallCheck();
-        StateMachine();
 
-        if (climbing) Debug.Log("Climbing!");
+        if (wallRight && Input.GetKeyDown(jumpKey) && climbJumpsLeft > 0) ClimbJumpR();
+        if (wallLeft && Input.GetKeyDown(jumpKey) && climbJumpsLeft > 0) ClimbJumpL();
+        //StateMachine();
 
-        if (climbing) ClimbingMovement();
+        //if (climbing && !exitingWall) Debug.Log("Climbing!");
+
+        //if (climbing && !exitingWall) ClimbingMovement();
     }
 
     private void StateMachine()
     {
         // State 1 - Climbing
-        if (wallFront && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+        if (wallFront && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !exitingWall)
         {
             if (!climbing && climbTimer > 0) StartClimbing();
 
@@ -49,39 +76,105 @@ public class Climbing : MonoBehaviour
             if (climbTimer < 0) StopClimbing();
         } 
 
+        //State 2 - Exiting
+        else if (exitingWall)
+        {
+            if(climbing) StopClimbing();
+
+            if (exitWallTimer > 0) exitWallTimer -= Time.deltaTime;
+            if (exitWallTimer < 0) exitingWall = false;
+        }
+
         //State 3 - None
         else
         {
             if (climbing) StopClimbing();
         }
+
+        if (wallRight && Input.GetKeyDown(jumpKey) && climbJumpsLeft > 0) ClimbJumpR();
+        if (wallLeft && Input.GetKeyDown(jumpKey) && climbJumpsLeft > 0) ClimbJumpL();
     }
 
     //Check if facing wall
     private void WallCheck()
     {
-        wallFront = Physics.SphereCast(transform.position, sphereCastRadius, transform.forward, out frontWallHit, detectionLength, whatIsWall);
+        wallRight = Physics.Raycast(transform.position, Vector3.right, out rightWallhit, wallCheckDistance, whatIsWall);
+        wallLeft = Physics.Raycast(transform.position, -Vector3.right, out rightWallhit, wallCheckDistance, whatIsWall);
+    }
 
-        //wallFront = Physics.Raycast(transform.position, transform.forward, out frontWallHit, detectionLength, whatIsWall);
-        //Debug.DrawRay(transform.position, transform.forward, Color.blue);
+    /*
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            wallFront = true;
+        }
+        else
+        {
+            wallFront = false;
+        }
 
-        if (pm.grounded)
+        //wallFront = Physics.SphereCast(transform.position, sphereCastRadius, transform.forward, out frontWallHit, detectionLength, whatIsWall);
+
+        //bool newWall = collision.gameObject.transform != lastWall || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > miniWallNormalAngleChange;
+
+        if ((wallFront) || pm.grounded)
         {
             climbTimer = maxClimbTime;
+            climbJumpsLeft = climbJumps;
         }
     }
+    */
+    #region Climb Up Walls
 
     private void StartClimbing()
     {
+        Debug.Log("Now Climbing!");
         climbing = true;
+        pm.climbing = true;
+
+        lastWall = frontWallHit.transform;
+        lastWallNormal = frontWallHit.normal;
     }
 
     private void ClimbingMovement()
     {
-        rb.velocity = new Vector3(rb.velocity.x, climbSpeed, rb.velocity.z);
+        rb.velocity = new Vector3((rb.velocity.y * climbSpeed), rb.velocity.y, rb.velocity.z);
     }
 
     private void StopClimbing()
     {
+        Debug.Log("No Longer Climbing!");
         climbing = false;
+        pm.climbing = false;
+    }
+    #endregion
+
+    private void ClimbJumpR()
+    {
+        Debug.Log("Kick to the right");
+        exitingWall = true;
+        exitWallTimer = exitWallTime;
+
+        Vector3 forceToApply = transform.up * climbJumpUpForce + frontWallHit.normal * climbJumpBackForce;
+
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.AddForce(forceToApply, ForceMode.Impulse);
+
+        climbJumpsLeft--;
+    }
+
+    private void ClimbJumpL()
+    {
+        Debug.Log("Left to the kick");
+        exitingWall = true;
+        exitWallTimer = exitWallTime;
+
+        Vector3 forceToApply = transform.up * -climbJumpUpForce + frontWallHit.normal * climbJumpBackForce;
+
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.AddForce(forceToApply, ForceMode.Impulse);
+
+        climbJumpsLeft--;
     }
 }

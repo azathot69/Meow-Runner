@@ -16,6 +16,9 @@ public class PlayerScript : MonoBehaviour
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction sprintAction;
+    public Climbing climbingScript;
+    public bool climbing;
+    public bool wallRun;
 
     [Header("UI")]
     //[SerializeField] private TMP_Text livesText;
@@ -48,7 +51,9 @@ public class PlayerScript : MonoBehaviour
     {
         WALK,
         SPRINT,
-        AIR
+        AIR,
+        CLIMB,
+        WALLRUN
     }
 
     //Variables
@@ -57,6 +62,8 @@ public class PlayerScript : MonoBehaviour
     [Header("Movement")]
     public float playerSpeed = 2;
     public float sprintSpeed = 5;
+    public float climbSpeed = 2;
+    public float wallRunSpeed = 2;
     public float moveSpeed;
     public float groundDrag;
 
@@ -168,8 +175,15 @@ public class PlayerScript : MonoBehaviour
     //Handle the different states of the player
     public void StateHandler()
     {
+        // Mode - Wall Run
+        if (wallRun)
+        {
+            state = movementState.WALLRUN;
+            moveSpeed = wallRunSpeed;
+        }
+
         // Sprinting
-        if (grounded && (Input.GetKey(sprintKeyL) || Input.GetKey(sprintKeyR)))
+        else if (grounded && (Input.GetKey(sprintKeyL) || Input.GetKey(sprintKeyR)))
         {
             state = movementState.SPRINT;
             moveSpeed = sprintSpeed;
@@ -194,6 +208,8 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     void MovePlayer()
     {
+        if (climbingScript.exitingWall) return;
+
         //Calculate Movement Direction
         var input = moveAction.ReadValue<Vector2>();
         
