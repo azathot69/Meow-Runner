@@ -125,13 +125,14 @@ public class PlayerScript : MonoBehaviour
         SpeedControl();
         StateHandler();
 
+        /*
         //Change Direction
         if (moveDirection != Vector3.zero)
         {
             catBody.transform.forward = (moveDirection);
             
         }
-
+        */
         //Handle Drag
         if (grounded)
         {
@@ -156,6 +157,9 @@ public class PlayerScript : MonoBehaviour
 
     private void MyInput()
     {
+
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
 
         //When to jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
@@ -206,17 +210,19 @@ public class PlayerScript : MonoBehaviour
     /// <summary>
     /// Moves the player around
     /// </summary>
-    void MovePlayer()
+    public void MovePlayer()
     {
         if (climbingScript.exitingWall) return;
 
         //Calculate Movement Direction
-        var input = moveAction.ReadValue<Vector2>();
+        //var input = moveAction.ReadValue<Vector2>();
         
-        moveDirection.x = input.x;
-        moveDirection.z = input.y;
+        //moveDirection.x = input.x;
+        //moveDirection.z = input.y;
 
-        moveDirection.Normalize();
+        //moveDirection.Normalize();
+
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         //if On Slope
         if (OnSlope() && !exitingSlope)
@@ -247,7 +253,7 @@ public class PlayerScript : MonoBehaviour
     /// <summary>
     /// Fixes the player's maximum speed
     /// </summary>
-    private void SpeedControl()
+    public void SpeedControl()
     {
         //Limit Speed on slope
         if (OnSlope() && !exitingSlope)
@@ -288,7 +294,7 @@ public class PlayerScript : MonoBehaviour
     /// <summary>
     /// Allows the player to jump again when touching the ground
     /// </summary>
-    private void ResetJump()
+    public void ResetJump()
     {
         exitingSlope = false;
 

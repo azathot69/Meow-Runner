@@ -23,7 +23,7 @@ public class ThirdPersonCam : MonoBehaviour
 
     private void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
     }
@@ -37,9 +37,9 @@ public class ThirdPersonCam : MonoBehaviour
         //roate player object
         if (thirdPerson == CameraStyle.Basic)
         {
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
-            Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
+            float horizontalInput = Input.GetAxis("Mouse X");
+            //float verticalInput = Input.GetAxis("Vertical");
+            Vector3 inputDir = orientation.forward * horizontalInput;
 
             if (inputDir != Vector3.zero)
                 playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);

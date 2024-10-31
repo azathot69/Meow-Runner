@@ -35,7 +35,15 @@ public class WallRunning : MonoBehaviour
 
     #endregion
 
-    private void start()
+    public float WallJumpUp;
+    public float WallJumpSide;
+    public KeyCode jumpKey = KeyCode.Space;
+
+    private bool exitingWall;
+    public float exitWallTime;
+    private float exitWallTimer;
+
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<PlayerScript>();
@@ -49,7 +57,7 @@ public class WallRunning : MonoBehaviour
         StateMachine();
     }
 
-    void fixedUpdate()
+    void FixedUpdate()
     {
         if (pm.wallRun)
         {
@@ -77,11 +85,25 @@ public class WallRunning : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //State 1 - WallRunning
-        if ((wallLeft || wallRight) && verticalInput > 0 && AboveGround())
+        if ((wallLeft || wallRight) && verticalInput > 0 && AboveGround() && !exitingWall)
         {
             //Start Wallrunning
-            if (!pm.wallRun) 
+            if (!pm.wallRun)
                 StartWallRun();
+
+            if (Input.GetKeyDown(jumpKey)) WallJump();
+        }
+
+        else if (exitingWall)
+        {
+            if (pm.wallRun)
+                StopWallRun();
+
+            if(exitWallTimer >  0)
+                exitWallTimer -= Time.deltaTime;
+
+            if(exitWallTimer <= 0)
+                exitingWall = false;
         }
 
         //Stage 3 - None
@@ -117,4 +139,20 @@ public class WallRunning : MonoBehaviour
     {
         pm.wallRun = false;
     }
+
+    private void WallJump()
+    {
+        exitingWall = true;
+        exitWallTimer = exitWallTime;
+
+        Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
+
+        Vector3 forceToApply = transform.up * WallJumpUp + wallNormal * WallJumpSide;
+
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.AddForce(forceToApply, ForceMode.Impulse);
+
+    }
+
+
 }
