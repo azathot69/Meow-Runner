@@ -72,7 +72,6 @@ public class Climbing : MonoBehaviour
 
     private void StartClimbing()
     {
-        Debug.Log("Start Climbing!");
         climbing = true;
     }
 
@@ -83,7 +82,6 @@ public class Climbing : MonoBehaviour
 
     private void StopClimbing()
     {
-        Debug.Log("Climbing Stopped!");
         climbing = false;
     }
 }
