@@ -353,6 +353,8 @@ MonoBehaviour:
   maxWallRunTime: 1.5
   wallCheckDistance: 3
   minJumpHeight: 2
+  wallLeft: 0
+  wallRight: 0
   orientation: {fileID: 5447516764409926624}
   pm: {fileID: 3962823901743815485}
 --- !u!114 &5473997467354203111
@@ -373,6 +375,9 @@ MonoBehaviour:
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
   climbSpeed: 10
   maxClimbTime: 10
   climbJumpUpForce: 10
@@ -385,5 +390,7 @@ MonoBehaviour:
   miniWallNormalAngleChange: 10
   wallCheckDistance: 3
   minJumpHeight: 2
+  wallRight: 0
+  wallLeft: 0
   exitingWall: 0
   exitWallTime: 0

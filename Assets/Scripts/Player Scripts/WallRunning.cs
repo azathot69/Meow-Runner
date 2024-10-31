@@ -21,7 +21,9 @@ public class WallRunning : MonoBehaviour
     public float minJumpHeight;
     private RaycastHit leftWallhit;
     private RaycastHit rightWallhit;
+    [SerializeField]
     private bool wallLeft;
+    [SerializeField]
     private bool wallRight;
 
     [Header("Reference")]

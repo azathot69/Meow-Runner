@@ -10,6 +10,7 @@ public class Climbing : MonoBehaviour
     public Rigidbody rb;
     public PlayerScript pm;
     public LayerMask whatIsWall;
+    public LayerMask whatIsGround;
 
     [Header("Climbing")]
     public float climbSpeed;
@@ -41,8 +42,12 @@ public class Climbing : MonoBehaviour
     public float minJumpHeight;
     private RaycastHit leftWallhit;
     private RaycastHit rightWallhit;
+    [SerializeField]
     bool wallRight;
+    [SerializeField]
     bool wallLeft;
+    private RaycastHit rightWallHit;
+    private RaycastHit leftWallHit;
 
     [Header("Exiting Wall")]
     public bool exitingWall;
@@ -55,8 +60,12 @@ public class Climbing : MonoBehaviour
     {
         WallCheck();
 
-        if (wallRight && Input.GetKeyDown(jumpKey) && climbJumpsLeft > 0) ClimbJumpR();
-        if (wallLeft && Input.GetKeyDown(jumpKey) && climbJumpsLeft > 0) ClimbJumpL();
+        if (wallRight && Input.GetKeyDown(jumpKey)) ClimbJumpR();
+        if (wallLeft && Input.GetKeyDown(jumpKey)) ClimbJumpL();
+
+        if (exitWallTimer > 0) exitWallTimer -= Time.deltaTime;
+        if (exitWallTimer < 0) exitingWall = false;
+
         //StateMachine();
 
         //if (climbing && !exitingWall) Debug.Log("Climbing!");
@@ -95,11 +104,17 @@ public class Climbing : MonoBehaviour
         if (wallLeft && Input.GetKeyDown(jumpKey) && climbJumpsLeft > 0) ClimbJumpL();
     }
 
+    private bool AboveGround()
+    {
+        return !Physics.Raycast(transform.position, Vector3.down, minJumpHeight, whatIsGround);
+    }
+
     //Check if facing wall
     private void WallCheck()
     {
         wallRight = Physics.Raycast(transform.position, Vector3.right, out rightWallhit, wallCheckDistance, whatIsWall);
-        wallLeft = Physics.Raycast(transform.position, -Vector3.right, out rightWallhit, wallCheckDistance, whatIsWall);
+        wallLeft = Physics.Raycast(transform.position, -Vector3.right, out leftWallHit, wallCheckDistance, whatIsWall);
+
     }
 
     /*
@@ -114,7 +129,7 @@ public class Climbing : MonoBehaviour
             wallFront = false;
         }
 
-        //wallFront = Physics.SphereCast(transform.position, sphereCastRadius, transform.forward, out frontWallHit, detectionLength, whatIsWall);
+        wallFront = Physics.SphereCast(transform.position, sphereCastRadius, transform.forward, out frontWallHit, detectionLength, whatIsWall);
 
         //bool newWall = collision.gameObject.transform != lastWall || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > miniWallNormalAngleChange;
 
@@ -156,7 +171,7 @@ public class Climbing : MonoBehaviour
         exitingWall = true;
         exitWallTimer = exitWallTime;
 
-        Vector3 forceToApply = transform.up * climbJumpUpForce + frontWallHit.normal * climbJumpBackForce;
+        Vector3 forceToApply = transform.up * climbJumpUpForce + rightWallHit.normal * climbJumpBackForce;
 
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(forceToApply, ForceMode.Impulse);
@@ -170,7 +185,7 @@ public class Climbing : MonoBehaviour
         exitingWall = true;
         exitWallTimer = exitWallTime;
 
-        Vector3 forceToApply = transform.up * -climbJumpUpForce + frontWallHit.normal * climbJumpBackForce;
+        Vector3 forceToApply = transform.up * climbJumpUpForce + leftWallhit.normal * climbJumpBackForce;
 
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(forceToApply, ForceMode.Impulse);
