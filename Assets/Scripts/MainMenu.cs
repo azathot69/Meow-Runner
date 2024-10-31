@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (GameIsPaused)
+			if (GameIsPaused == true)
 			{
 				Resume();
 			}
