@@ -393,4 +393,4 @@ MonoBehaviour:
   wallRight: 0
   wallLeft: 0
   exitingWall: 0
-  exitWallTime: 0
+  exitWallTime: 0.2
