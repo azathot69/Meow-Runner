@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour
     InputAction sprintAction;
 
     [Header("UI")]
-    [SerializeField] private TMP_Text livesText;
+    //[SerializeField] private TMP_Text livesText;
     
 
     [Header("Jumping")]
@@ -68,9 +68,9 @@ public class PlayerScript : MonoBehaviour
     bool readyToJump;
 
     [Header("Keybinds")]
-    private KeyCode jumpKey = KeyCode.Space;
-    private KeyCode sprintKeyL = KeyCode.LeftShift;
-    private KeyCode sprintKeyR = KeyCode.RightShift;
+    public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode sprintKeyL = KeyCode.LeftShift;
+    public KeyCode sprintKeyR = KeyCode.RightShift;
 
 
     [Header("Ground Check")]
@@ -108,7 +108,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        livesText.text = "Lives: " + lives;
+        //livesText.text = "Lives: " + lives;
 
         //Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
@@ -148,12 +148,11 @@ public class PlayerScript : MonoBehaviour
 
     private void MyInput()
     {
-        //horizontalInput = Input.GetAxisRaw("Horizontal");
-        //verticalInput = Input.GetAxisRaw("Vertical");
 
         //When to jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
+            Debug.Log("You Pressed Jump!");
             readyToJump = false;
 
             Jump();
@@ -187,7 +186,6 @@ public class PlayerScript : MonoBehaviour
         {
             state = movementState.AIR;
         }
-
     }
 
     /// <summary>
@@ -202,13 +200,6 @@ public class PlayerScript : MonoBehaviour
         moveDirection.z = input.y;
 
         moveDirection.Normalize();
-
-        //Debug.Log("X: " + input.x);
-        //Debug.Log("Y: " + input.y);
-
-
-
-        //moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         //if On Slope
         if (OnSlope() && !exitingSlope)
@@ -269,7 +260,7 @@ public class PlayerScript : MonoBehaviour
     {
         exitingSlope = true;
 
-        //Debug.Log("Jumping");
+        Debug.Log("Jumping");
         //Reset Y Velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
