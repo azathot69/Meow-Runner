@@ -65,8 +65,8 @@ public class PlayerScript : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
-    [SerializeField]
-    bool readyToJump;
+    
+    public bool readyToJump;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -153,7 +153,7 @@ public class PlayerScript : MonoBehaviour
         //When to jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
-            Debug.Log("You Pressed Jump!");
+            
             readyToJump = false;
 
             Jump();
@@ -257,11 +257,10 @@ public class PlayerScript : MonoBehaviour
     /// <summary>
     /// Makes the player jump
     /// </summary>
-    private void Jump()
+    public void Jump()
     {
         exitingSlope = true;
 
-        Debug.Log("Jumping");
         //Reset Y Velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
@@ -321,7 +320,7 @@ public class PlayerScript : MonoBehaviour
     /// <returns></returns>
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
-        Debug.DrawRay(transform.position, Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized, Color.blue);
+        
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 }

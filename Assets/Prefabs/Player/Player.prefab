@@ -103,7 +103,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.6
+  m_Radius: 0.62
   m_Center: {x: 0.75, y: 0, z: 0}
 --- !u!1 &1808075443574724746
 GameObject:
@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 4666891852175496679}
   - component: {fileID: 3962823901743815485}
   - component: {fileID: 9082413904329329913}
+  - component: {fileID: 632217299865203156}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -274,7 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf47617f24e45e4fbef65a5b763deaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livesText: {fileID: 0}
   jumpForce: 15
   jumpCooldown: 0.25
   airMultiplier: 0.4
@@ -283,6 +283,7 @@ MonoBehaviour:
   ImOnSlope: 0
   lives: 9
   deathYLevel: -15
+  startPos: {x: 0, y: 0, z: 0}
   state: 0
   playerSpeed: 12
   sprintSpeed: 24
@@ -322,3 +323,28 @@ MonoBehaviour:
   climbing: 0
   detectionLength: 1
   sphereCastRadius: 0.25
+--- !u!114 &632217299865203156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097349826680459598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e1cafd37a772c48bc8d24e78ee5f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 5447516764409926624}
+  rb: {fileID: 5280415802761751386}
+  pm: {fileID: 3962823901743815485}
+  whatIsSwing:
+    serializedVersion: 2
+    m_Bits: 512
+  swingSpeed: 0
+  swingForce: 0
+  swinging: 0
+  detectionLength: 0
+  sphereCastRadius: 0
+  swingCheck: 0
+  state: 0

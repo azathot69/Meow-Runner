@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Swinging : MonoBehaviour
 {
-    #region
+    #region Variables
     [Header("References")]
     public Transform orientation;
     public Rigidbody rb;
@@ -16,6 +16,7 @@ public class Swinging : MonoBehaviour
 
     [Header("Swing")]
     public float swingSpeed;
+    public float swingForce;
 
     public bool swinging;
 
@@ -36,28 +37,51 @@ public class Swinging : MonoBehaviour
     }
     #endregion
 
-    private void StateMachine()
+    private void FixedUpdate()
     {
-        // S1 - Swinging Stationary ~ Swing Model B.A.F.
-        if (swingCheck)
-        {
-            state = swingState.SWING;
-        }
-
-        // S2 - Swing ~ Move Player in Direction
-        else
+        if (pm.grounded)
         {
             state = swingState.NOTSWINGING;
+        }
+    }
+
+    private void Update()
+    {
+        StateMachine();
+
+       
+    }
+
+    private void StateMachine()
+    {
+        switch (state)
+        {
+            case swingState.SWING:
+                StartSwinging();
+                break;
+
+            case swingState.SWINGJUMP:
+                SwingMovement();
+                break;
+
+            case swingState.NOTSWINGING:
+                break;
+
+            default:
+                break;
         }
 
     }
 
-    /// <summary>
-    /// Check if player touches Swinging Object
-    /// </summary>
-    private void SwingCheck()
+
+    private void OnTriggerEnter(Collider collision)
     {
-        swingCheck = Physics.SphereCast(transform.position, sphereCastRadius, transform.forward, out swingObject, detectionLength, whatIsSwing);
+        Debug.Log("You collided with... ");
+        if (collision.gameObject.tag == "Swing")
+        {
+            Debug.Log(" A Swing!");
+            state = swingState.SWING;
+        }
     }
 
     /// <summary>
@@ -65,19 +89,40 @@ public class Swinging : MonoBehaviour
     /// </summary>
     private void StartSwinging()
     {
+        Debug.Log("Init Swing");
         swinging = true;
 
         //Stop Movement
-        rb.velocity = new Vector3(0, 0, 0);
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+
+        //Check for input
+        if (Input.GetKey(pm.jumpKey))
+        {
+            //Allow Jump
+            pm.readyToJump = true;
+
+            //Unfreeze Pos and Freeze Rot
+            rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+            //Launch
+            state = swingState.SWINGJUMP;
+        }
     }
 
-
+    private void SwingMovement()
+    {
+        Debug.Log("Hey im swingin here!");
+        //pm.Jump();
+        //rb.AddForce(transform.forward * swingForce, ForceMode.Impulse);
+        
+    }
 
     /// <summary>
     /// Stop Swinging
     /// </summary>
     private void StopSwinging()
-    {
+    { 
         swinging = false;
     }
 }
