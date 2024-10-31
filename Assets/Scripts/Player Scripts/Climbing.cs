@@ -175,8 +175,6 @@ public class Climbing : MonoBehaviour
 
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(forceToApply, ForceMode.Impulse);
-
-        climbJumpsLeft--;
     }
 
     private void ClimbJumpL()
@@ -189,7 +187,5 @@ public class Climbing : MonoBehaviour
 
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(forceToApply, ForceMode.Impulse);
-
-        climbJumpsLeft--;
     }
 }

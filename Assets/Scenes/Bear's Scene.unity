@@ -2446,6 +2446,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5473997467354203111, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
+      propertyPath: exitWallTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473997467354203111, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
+      propertyPath: wallCheckDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473997467354203111, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
+      propertyPath: whatIsGround.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 6249818433645058971, guid: c6cb3dc8b2e788941bf0258733a39fc9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -50.80165
