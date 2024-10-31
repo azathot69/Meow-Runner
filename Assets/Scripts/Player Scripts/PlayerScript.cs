@@ -37,6 +37,7 @@ public class PlayerScript : MonoBehaviour
     [Header("Respawning")]
     public int lives = 9;
     public float deathYLevel = -10f;
+    [SerializeField]
     private Vector3 startPos;
     private bool hasDied = false;
 
@@ -100,7 +101,7 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
-        
+        startPos = rb.position;
     }
 
 
