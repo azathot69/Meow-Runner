@@ -96,7 +96,7 @@ public class Swinging : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeAll;
 
         //Check for input
-        if (Input.GetKey(pm.jumpKey))
+        if (Input.GetKeyDown(pm.jumpKey))
         {
             //Allow Jump
             pm.readyToJump = true;
@@ -113,8 +113,9 @@ public class Swinging : MonoBehaviour
     private void SwingMovement()
     {
         Debug.Log("Hey im swingin here!");
-        //pm.Jump();
+        pm.Jump();
         //rb.AddForce(transform.forward * swingForce, ForceMode.Impulse);
+        state = swingState.NOTSWINGING;
         
     }
 

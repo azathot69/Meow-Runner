@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.34344184, g: 0.3436023, b: 0.3301479, a: 1}
+  m_IndirectSpecularColor: {r: 0.34343314, g: 0.34359863, b: 0.3301513, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 532891277}
   - component: {fileID: 532891278}
   m_Layer: 9
-  m_Name: h
+  m_Name: SwingTEST
   m_TagString: Swing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -522,7 +522,7 @@ Transform:
   m_GameObject: {fileID: 532891276}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6948195, z: -0, w: 0.7191842}
-  m_LocalPosition: {x: -42.796402, y: 3.16, z: -41.242588}
+  m_LocalPosition: {x: -42.796402, y: 6.69, z: -41.242588}
   m_LocalScale: {x: 3.908, y: 3.908, z: 3.908}
   m_ConstrainProportionsScale: 0
   m_Children:
