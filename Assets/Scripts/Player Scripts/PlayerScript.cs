@@ -38,7 +38,7 @@ public class PlayerScript : MonoBehaviour
     public bool ImOnSlope;
 
     [Header("Respawning")]
-    public int lives = 9;
+    public int lives = 0;
     public float deathYLevel = -10f;
     [SerializeField]
     private Vector3 startPos;
@@ -116,7 +116,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //livesText.text = "Lives: " + lives;
+        //livesText.text = "Deaths: " + lives;
 
         //Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
@@ -307,7 +307,7 @@ public class PlayerScript : MonoBehaviour
         //cause the player to lose a life
         if (hasDied)
         {
-            lives--;
+            lives++;
             hasDied = false;
         }
         else
