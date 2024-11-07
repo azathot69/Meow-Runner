@@ -104,7 +104,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.6
-  m_Center: {x: 0.75, y: 0, z: 0}
+  m_Center: {x: 0.1, y: 0, z: 0}
 --- !u!1 &2191351936268671698
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +212,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf47617f24e45e4fbef65a5b763deaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  climbingScript: {fileID: 0}
+  climbing: 0
+  wallRun: 0
   jumpForce: 15
   jumpCooldown: 0.25
   airMultiplier: 0.4
@@ -220,9 +223,12 @@ MonoBehaviour:
   ImOnSlope: 0
   lives: 9
   deathYLevel: -15
+  startPos: {x: 0, y: 0, z: 0}
   state: 0
   playerSpeed: 12
   sprintSpeed: 24
+  climbSpeed: 2
+  wallRunSpeed: 2
   moveSpeed: 12
   groundDrag: 3
   readyToJump: 1
@@ -254,11 +260,25 @@ MonoBehaviour:
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
   climbSpeed: 12
   maxClimbTime: 0.5
+  climbJumpUpForce: 0
+  climbJumpBackForce: 0
+  jumpKey: 32
+  climbJumps: 0
   climbing: 0
   detectionLength: 1
   sphereCastRadius: 0.25
+  miniWallNormalAngleChange: 0
+  wallCheckDistance: 0
+  minJumpHeight: 0
+  wallRight: 0
+  wallLeft: 0
+  exitingWall: 0
+  exitWallTime: 0
 --- !u!1 &2456838281654307278
 GameObject:
   m_ObjectHideFlags: 0
