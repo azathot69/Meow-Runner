@@ -104,7 +104,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.62
-  m_Center: {x: 0.75, y: 0, z: 0}
+  m_Center: {x: 0.1, y: 0, z: 0}
 --- !u!1 &1808075443574724746
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +324,9 @@ MonoBehaviour:
   whatIsSwing:
     serializedVersion: 2
     m_Bits: 512
+  myLineRenderer: {fileID: 0}
+  firstObject: {fileID: 0}
+  secondObject: {fileID: 0}
   swingSpeed: 0
   swingForce: 0
   swinging: 0
@@ -357,6 +360,10 @@ MonoBehaviour:
   wallRight: 0
   orientation: {fileID: 5447516764409926624}
   pm: {fileID: 3962823901743815485}
+  WallJumpUp: 0
+  WallJumpSide: 0
+  jumpKey: 32
+  exitWallTime: 0
 --- !u!114 &5473997467354203111
 MonoBehaviour:
   m_ObjectHideFlags: 0
