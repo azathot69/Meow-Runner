@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 //using static UnityEditor.Timeline.TimelinePlaybackControls;
 using TMPro;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Dictates Player Behavior
@@ -21,7 +22,7 @@ public class PlayerScript : MonoBehaviour
     public bool wallRun;
 
     [Header("UI")]
-    //[SerializeField] private TMP_Text livesText;
+    [SerializeField] private TMP_Text livesText;
     
 
     [Header("Jumping")]
@@ -116,7 +117,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //livesText.text = "Deaths: " + lives;
+        livesText.text = "Deaths: " + lives;
 
         //Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
@@ -247,7 +248,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         //Turn off fravity while on slope
-        rb.useGravity = !OnSlope();
+        //rb.useGravity = !OnSlope();
     }
 
     /// <summary>
@@ -255,6 +256,7 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     public void SpeedControl()
     {
+        /*
         //Limit Speed on slope
         if (OnSlope() && !exitingSlope)
         {
@@ -271,8 +273,17 @@ public class PlayerScript : MonoBehaviour
             {
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
-
             }
+        }
+        */
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        //Limit Velocity if needed
+        if (flatVel.magnitude > moveSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+
         }
     }
 
@@ -288,7 +299,7 @@ public class PlayerScript : MonoBehaviour
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
-        //rb.AddForce(Vector3.down * gravity, ForceMode.Force);
+        //rb.AddForce(Vector3.down * 5, ForceMode.Force);
     }
 
     /// <summary>
@@ -305,15 +316,7 @@ public class PlayerScript : MonoBehaviour
     {
         //teleport the player to the starting position
         //cause the player to lose a life
-        if (hasDied)
-        {
-            lives++;
-            hasDied = false;
-        }
-        else
-        {
-            //Go to game over
-        }
+        lives++;
         transform.position = startPos;
     }
 
@@ -326,9 +329,17 @@ public class PlayerScript : MonoBehaviour
         //Debug.DrawRay(rb.transform.position, Vector3.down, Color.green);
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
-            ImOnSlope = true;
+            
+            
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-
+            if (angle != 0)
+            {
+                ImOnSlope = true;
+            }
+            else
+            {
+                ImOnSlope = false;
+            }
             //Debug.Log("Angle: " + angle);
             return angle < maxSlopeAngle && angle != 0;
         }
