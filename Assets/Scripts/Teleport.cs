@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Teleport : MonoBehaviour
 {
     #region Variables
+    [Header("Go To Scene")]
     public int goToScene;
 
     #endregion
