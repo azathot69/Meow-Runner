@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
@@ -8,9 +9,13 @@ public class EnemyFollow : MonoBehaviour
     [Header("References")]
     public Transform target;
     public float enemySpeed;
+    public float detectionRadius;
+
+    SphereCollider myCollider;
 
     [SerializeField]
     private behaveState state;
+    private Transform startingPos;
 
     public enum behaveState
     {
@@ -21,6 +26,20 @@ public class EnemyFollow : MonoBehaviour
 
     //Range of Notice
     #endregion
+
+    private void Start()
+    {
+        //Sphere Collider
+        myCollider = GetComponent<SphereCollider>();
+
+        if (myCollider != null)
+        {
+            myCollider.radius = detectionRadius;
+        }
+
+        //Starting Pos
+        //startingPos = this.transform.position;
+    }
 
     private void Update()
     {
@@ -47,8 +66,17 @@ public class EnemyFollow : MonoBehaviour
                 break;  
 
             case behaveState.RETURN:
-
+                
                 break;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            state = behaveState.CHASE;
+        }
+    }
+
 }
