@@ -11,6 +11,8 @@ public class EnemyFollow : MonoBehaviour
     public float enemySpeed;
     public float detectionRadius;
 
+    Rigidbody rb;
+
     SphereCollider myCollider;
 
     [SerializeField]
@@ -29,6 +31,9 @@ public class EnemyFollow : MonoBehaviour
 
     private void Start()
     {
+        //Get Rigidbody
+        rb = GetComponentInParent<Rigidbody>();
+
         //Sphere Collider
         myCollider = GetComponent<SphereCollider>();
 
@@ -62,7 +67,7 @@ public class EnemyFollow : MonoBehaviour
                 break;
 
             case behaveState.CHASE:
-                transform.position = Vector3.MoveTowards(this.transform.position,target.position, enemySpeed * Time.deltaTime);
+                rb.transform.position = Vector3.MoveTowards(this.transform.position,target.position, enemySpeed * Time.deltaTime);
                 break;  
 
             case behaveState.RETURN:
