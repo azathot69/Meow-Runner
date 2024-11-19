@@ -208,12 +208,14 @@ public class PlayerScript : MonoBehaviour
         if (climbingScript.exitingWall) return;
 
         //Calculate Movement Direction
-        //var input = moveAction.ReadValue<Vector2>();
+        /*
+        var input = moveAction.ReadValue<Vector2>();
         
-        //moveDirection.x = input.x;
-        //moveDirection.z = input.y;
+        moveDirection.x = input.x;
+        moveDirection.z = input.y;
 
-        //moveDirection.Normalize();
+        moveDirection.Normalize();
+        */
 
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 

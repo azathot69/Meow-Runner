@@ -388,7 +388,7 @@ MonoBehaviour:
   jumpKey: 32
   sprintKeyL: 304
   sprintKeyR: 303
-  playerHeight: 4
+  playerHeight: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -480,7 +480,6 @@ MonoBehaviour:
   whatIsSwing:
     serializedVersion: 2
     m_Bits: 512
-  myLineRenderer: {fileID: 0}
   firstObject: {fileID: 5543131040216176884}
   secondObject: {fileID: 0}
   swingSpeed: 0
