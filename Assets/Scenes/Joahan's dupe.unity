@@ -4045,6 +4045,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 115084552}
     - target: {fileID: 8605890904211091837, guid: 51d443765262d1344a0481008f543000, type: 3}
+      propertyPath: rotationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605890904211091837, guid: 51d443765262d1344a0481008f543000, type: 3}
       propertyPath: thirdPersonCam
       value: 
       objectReference: {fileID: 1944501603}
