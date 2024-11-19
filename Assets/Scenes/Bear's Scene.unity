@@ -694,15 +694,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5115450599535452395, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.04210057
+      value: 0.042100567
       objectReference: {fileID: 0}
     - target: {fileID: 5115450599535452395, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000037219878
+      value: 3.9373797e-19
       objectReference: {fileID: 0}
     - target: {fileID: 5115450599535452395, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.5683686e-10
+      value: 4.8186215e-18
       objectReference: {fileID: 0}
     - target: {fileID: 5358974215006854921, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4103,6 +4103,14 @@ PrefabInstance:
       propertyPath: livesText
       value: 
       objectReference: {fileID: 1277431470}
+    - target: {fileID: 2982817012477958655, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
+      propertyPath: playerHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982817012477958655, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
+      propertyPath: climbingScript
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5274206320260916236, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
       propertyPath: exitWallTime
       value: 5
@@ -4165,7 +4173,7 @@ PrefabInstance:
       objectReference: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 7936920098769322975, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
       propertyPath: m_Name
-      value: PlayerV3
+      value: PlayerV4
       objectReference: {fileID: 0}
     - target: {fileID: 8166892602463299802, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
       propertyPath: m_Enabled

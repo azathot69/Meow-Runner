@@ -146,7 +146,7 @@ public class Climbing : MonoBehaviour
     {
         Debug.Log("Now Climbing!");
         climbing = true;
-        pm.climbing = true;
+
 
         lastWall = frontWallHit.transform;
         lastWallNormal = frontWallHit.normal;
@@ -161,7 +161,7 @@ public class Climbing : MonoBehaviour
     {
         Debug.Log("No Longer Climbing!");
         climbing = false;
-        pm.climbing = false;
+
     }
     #endregion
 

@@ -217,7 +217,7 @@ MonoBehaviour:
   whatIsSwing:
     serializedVersion: 2
     m_Bits: 512
-  firstObject: {fileID: 7594555824892487444}
+  firstObject: {fileID: 0}
   secondObject: {fileID: 0}
   swingSpeed: 0
   swingForce: 10

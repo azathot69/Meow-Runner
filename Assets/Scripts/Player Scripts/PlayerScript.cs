@@ -17,8 +17,7 @@ public class PlayerScript : MonoBehaviour
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction sprintAction;
-    public Climbing climbingScript;
-    public bool climbing;
+
     public bool wallRun;
 
     [Header("UI")]
@@ -205,7 +204,6 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     public void MovePlayer()
     {
-        if (climbingScript.exitingWall) return;
 
         //Calculate Movement Direction
         /*
