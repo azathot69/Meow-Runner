@@ -4095,6 +4095,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1009068114868858221, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
+      propertyPath: attackAction
+      value: 323
+      objectReference: {fileID: 0}
     - target: {fileID: 2982817012477958655, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
       propertyPath: jumpForce
       value: 15
