@@ -69,6 +69,7 @@ public class WallRunning : MonoBehaviour
     {
         wallRight = Physics.Raycast(transform.position, Vector3.right, out rightWallhit, wallCheckDistance, whatIsWall);
         wallLeft = Physics.Raycast(transform.position, -Vector3.right, out leftWallhit, wallCheckDistance, whatIsWall);
+
     }
 
     private bool AboveGround()
@@ -128,14 +129,12 @@ public class WallRunning : MonoBehaviour
 
         Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
 
-        if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
-            wallForward = -wallForward;
+
 
         //forward force
         rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
 
-        if (!(wallLeft && horizontalInput > 0) && !(wallRight && horizontalInput < 0))
-            rb.AddForce(-wallNormal * 100, ForceMode.Force);
+
     }
 
     private void StopWallRun()

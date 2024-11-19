@@ -8,7 +8,7 @@ public class Attack : MonoBehaviour
     #region
     [Header("References")]
     private bool calmdown; //TEMP VARIABBLE
-    public KeyCode attackAction = KeyCode.Z;
+    public KeyCode attackAction = KeyCode.Mouse0;
     public float atkCoolDown;
     public GameObject attackHitBox;
 
