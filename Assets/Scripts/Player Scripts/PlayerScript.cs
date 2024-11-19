@@ -147,6 +147,18 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Kill Player when colliding with enemy
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "enemy")
+        {
+            Respawn();
+        }
+    }
+
     private void MyInput()
     {
 
