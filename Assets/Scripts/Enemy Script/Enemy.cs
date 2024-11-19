@@ -15,6 +15,15 @@ public class Enemy : MonoBehaviour
     /// Check if hit by attack
     /// </summary>
     /// <param name="collision"></param>
+    /*
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "playerAttack")
+        {
+            HitByAttack();
+        }
+    }
+    */
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "playerAttack")
@@ -26,8 +35,9 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Lose HP when hit
     /// </summary>
-    private void HitByAttack()
+    public void HitByAttack()
     {
+        Debug.Log("I'm Hit!");
         if (HP > 0){
             HP--;
         }
@@ -40,7 +50,7 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Deactivate self
     /// </summary>
-    private void Die()
+    public void Die()
     {
         gameObject.SetActive(false);
     }

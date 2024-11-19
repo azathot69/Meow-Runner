@@ -22,8 +22,7 @@ public class EnemyFollow : MonoBehaviour
     public enum behaveState
     {
         STAY,
-        CHASE,
-        RETURN
+        CHASE
     }
 
     //Range of Notice
@@ -41,9 +40,6 @@ public class EnemyFollow : MonoBehaviour
         {
             myCollider.radius = detectionRadius;
         }
-
-        //Starting Pos
-        //startingPos = this.transform.position;
     }
 
     private void Update()
@@ -69,10 +65,6 @@ public class EnemyFollow : MonoBehaviour
             case behaveState.CHASE:
                 rb.transform.position = Vector3.MoveTowards(this.transform.position,target.position, enemySpeed * Time.deltaTime);
                 break;  
-
-            case behaveState.RETURN:
-                
-                break;
         }
     }
 

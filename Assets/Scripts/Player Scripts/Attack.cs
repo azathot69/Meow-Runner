@@ -1,30 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Attack : MonoBehaviour
 {
     #region
     [Header("References")]
     private bool calmdown; //TEMP VARIABBLE
-    //Attack Button
-    //Attack Cooldown Timer
-    //Attack Cooldown
-    //Can Attack Bool
-    //Attack GameObject
+    public KeyCode attackAction = KeyCode.Z;
+    public float atkCoolDown;
+    public GameObject attackHitBox;
+
+    private bool canAttack;
     #endregion
 
-    //Check if Can Attack
+    private void Start()
+    {
+        attackHitBox.SetActive(false);
+        canAttack = true;
+    }
+
+
     private void Update()
     {
+        AttackInput();
+
         //If Can Attack - Return
+        if (canAttack) return;
 
-        //If !Can Attack
-            //Countdown--
 
-        //If Countdown < 0
-            //Can Attack = true
-            //Countdown = Timer
+    }
+
+    private void AttackInput()
+    {
+        if (Input.GetKey(attackAction) && canAttack)
+        {
+            canAttack = false;
+
+            PlayerAttack();
+
+            Invoke(nameof(ResetAttack), atkCoolDown);
+        }
     }
 
     /// <summary>
@@ -32,10 +49,15 @@ public class Attack : MonoBehaviour
     /// </summary>
     private void PlayerAttack()
     {
-        //Check to see if player can attack
-
         //Attack
+        attackHitBox.SetActive(true);
 
         //Set up Cooldown
+    }
+
+    private void ResetAttack()
+    {
+        canAttack = true;
+        attackHitBox.SetActive(false);
     }
 }
