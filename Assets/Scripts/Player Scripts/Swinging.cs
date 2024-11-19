@@ -14,13 +14,12 @@ public class Swinging : MonoBehaviour
     public PlayerScript pm;
     public LayerMask whatIsSwing;
 
-    [Header("Render Line")]
-    public GameObject firstObject;
-    public GameObject secondObject;
 
     [Header("Swing")]
     public float swingSpeed;
     public float swingForce;
+
+    public float jumpForce;
 
     public bool swinging;
 
@@ -67,7 +66,7 @@ public class Swinging : MonoBehaviour
 
        if (pm.grounded)
         {
-            secondObject = null;
+
         }
     }
 
@@ -99,7 +98,7 @@ public class Swinging : MonoBehaviour
         if (collision.gameObject.tag == "Swing")
         {
             Debug.Log(" A Swing!");
-            secondObject = collision.gameObject;
+
             state = swingState.SWING;
         }
     }
@@ -133,7 +132,12 @@ public class Swinging : MonoBehaviour
     private void SwingMovement()
     {
         Debug.Log("Hey im swingin here!");
-        pm.Jump();
+
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+
         //rb.AddForce(transform.forward * swingForce, ForceMode.Impulse);
         state = swingState.NOTSWINGING;
         
@@ -144,7 +148,7 @@ public class Swinging : MonoBehaviour
     /// </summary>
     private void StopSwinging()
     {
-        secondObject = null;
+
         swinging = false;
     }
 }
