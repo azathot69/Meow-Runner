@@ -43,11 +43,11 @@ GameObject:
   - component: {fileID: 347094813974637118}
   - component: {fileID: 4918423385774725160}
   - component: {fileID: 2398267193852166659}
-  - component: {fileID: 3207582253309853808}
   - component: {fileID: 9191893679733618546}
+  - component: {fileID: 4923004303721851173}
   m_Layer: 0
   m_Name: PlayerV3
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,16 +138,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf47617f24e45e4fbef65a5b763deaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  climbingScript: {fileID: 3207582253309853808}
+  climbingScript: {fileID: 0}
   climbing: 0
   wallRun: 0
-  jumpForce: 15
+  livesText: {fileID: 0}
+  jumpForce: 30
   jumpCooldown: 0.25
   airMultiplier: 0.4
   maxSlopeAngle: 40
   exitingSlope: 0
   ImOnSlope: 0
-  lives: 9
+  lives: 0
   deathYLevel: -15
   startPos: {x: 0, y: 0, z: 0}
   state: 0
@@ -161,50 +162,13 @@ MonoBehaviour:
   jumpKey: 32
   sprintKeyL: 304
   sprintKeyR: 303
-  playerHeight: 4
+  playerHeight: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   grounded: 1
   orientation: {fileID: 6221971462416921763}
   catBody: {fileID: 7594555824892487444}
---- !u!114 &3207582253309853808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7479879947334198203}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cac9f55402428b446a47ecedaf99f341, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orientation: {fileID: 6221971462416921763}
-  rb: {fileID: 347094813974637118}
-  pm: {fileID: 2398267193852166659}
-  whatIsWall:
-    serializedVersion: 2
-    m_Bits: 256
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  climbSpeed: 0
-  maxClimbTime: 0
-  climbJumpUpForce: 50
-  climbJumpBackForce: 50
-  jumpKey: 32
-  climbJumps: 999
-  climbing: 0
-  detectionLength: 3
-  sphereCastRadius: 10
-  miniWallNormalAngleChange: 10
-  wallCheckDistance: 3
-  minJumpHeight: 2
-  wallRight: 0
-  wallLeft: 0
-  exitingWall: 0
-  exitWallTime: 0.2
 --- !u!114 &9191893679733618546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +199,33 @@ MonoBehaviour:
   WallJumpSide: 13
   jumpKey: 32
   exitWallTime: 0.2
+--- !u!114 &4923004303721851173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7479879947334198203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e1cafd37a772c48bc8d24e78ee5f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 8379031919675620056}
+  rb: {fileID: 347094813974637118}
+  pm: {fileID: 2398267193852166659}
+  whatIsSwing:
+    serializedVersion: 2
+    m_Bits: 512
+  firstObject: {fileID: 7594555824892487444}
+  secondObject: {fileID: 0}
+  swingSpeed: 0
+  swingForce: 10
+  swinging: 0
+  detectionLength: 0
+  sphereCastRadius: 0
+  swingCheck: 0
+  state: 0
 --- !u!1 &7594555824892487444
 GameObject:
   m_ObjectHideFlags: 0
