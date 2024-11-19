@@ -2321,6 +2321,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc1bfec5807aba24e83de5b35ee37ac8, type: 3}
+--- !u!114 &1875441262 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7130558011873863008, guid: b1e1c738fc646f649a5e3f36c5c2e1c6, type: 3}
+  m_PrefabInstance: {fileID: 1365529034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1876329673 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2059299878414573077, guid: b1e1c738fc646f649a5e3f36c5c2e1c6, type: 3}
@@ -2721,6 +2732,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
+    - target: {fileID: 2398267193852166659, guid: 32bf6d86d9ad04246bf74aa426f63415, type: 3}
+      propertyPath: livesText
+      value: 
+      objectReference: {fileID: 1875441262}
     - target: {fileID: 7479879947334198203, guid: 32bf6d86d9ad04246bf74aa426f63415, type: 3}
       propertyPath: m_Name
       value: PlayerV3
@@ -2785,15 +2800,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5115450599535452395, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.04210057
+      value: 0.042100567
       objectReference: {fileID: 0}
     - target: {fileID: 5115450599535452395, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000037219878
+      value: 3.9373797e-19
       objectReference: {fileID: 0}
     - target: {fileID: 5115450599535452395, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.5683686e-10
+      value: 4.8186215e-18
       objectReference: {fileID: 0}
     - target: {fileID: 5461953926303576871, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_Name
