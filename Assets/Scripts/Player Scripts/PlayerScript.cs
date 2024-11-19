@@ -126,14 +126,6 @@ public class PlayerScript : MonoBehaviour
         SpeedControl();
         StateHandler();
 
-        /*
-        //Change Direction
-        if (moveDirection != Vector3.zero)
-        {
-            catBody.transform.forward = (moveDirection);
-            
-        }
-        */
         //Handle Drag
         if (grounded)
         {
@@ -247,8 +239,6 @@ public class PlayerScript : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
 
-        //Turn off fravity while on slope
-        //rb.useGravity = !OnSlope();
     }
 
     /// <summary>
@@ -256,7 +246,7 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     public void SpeedControl()
     {
-        /*
+        
         //Limit Speed on slope
         if (OnSlope() && !exitingSlope)
         {
@@ -275,7 +265,7 @@ public class PlayerScript : MonoBehaviour
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
-        */
+        /*
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         //Limit Velocity if needed
@@ -285,6 +275,7 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
 
         }
+        */
     }
 
     /// <summary>
@@ -292,6 +283,8 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     public void Jump()
     {
+        //if (wallRun) return;
+
         exitingSlope = true;
 
         //Reset Y Velocity
@@ -308,7 +301,6 @@ public class PlayerScript : MonoBehaviour
     public void ResetJump()
     {
         exitingSlope = false;
-
         readyToJump = true;
     }
 
@@ -326,11 +318,8 @@ public class PlayerScript : MonoBehaviour
     /// <returns></returns>
     public bool OnSlope()
     {
-        //Debug.DrawRay(rb.transform.position, Vector3.down, Color.green);
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
-            
-            
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             if (angle != 0)
             {
@@ -353,7 +342,6 @@ public class PlayerScript : MonoBehaviour
     /// <returns></returns>
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
-        
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 }

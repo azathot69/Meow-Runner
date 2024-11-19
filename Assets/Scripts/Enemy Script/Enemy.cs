@@ -12,27 +12,6 @@ public class Enemy : MonoBehaviour
     #endregion
 
     /// <summary>
-    /// Check if hit by attack
-    /// </summary>
-    /// <param name="collision"></param>
-    /*
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.tag == "playerAttack")
-        {
-            HitByAttack();
-        }
-    }
-    */
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "playerAttack")
-        {
-            HitByAttack();
-        }
-    }
-
-    /// <summary>
     /// Lose HP when hit
     /// </summary>
     public void HitByAttack()

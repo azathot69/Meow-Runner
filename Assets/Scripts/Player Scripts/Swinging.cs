@@ -15,7 +15,6 @@ public class Swinging : MonoBehaviour
     public LayerMask whatIsSwing;
 
     [Header("Render Line")]
-    public LineRenderer myLineRenderer;
     public GameObject firstObject;
     public GameObject secondObject;
 
@@ -44,7 +43,6 @@ public class Swinging : MonoBehaviour
 
     private void Start()
     {
-        myLineRenderer.positionCount = 2;
 
         
     }
@@ -62,11 +60,6 @@ public class Swinging : MonoBehaviour
     private void Update()
     {
         
-        if (secondObject != null)
-        {
-            myLineRenderer.SetPosition(0, firstObject.transform.position);
-            myLineRenderer.SetPosition(1, secondObject.transform.position);
-        }
         
 
         StateMachine();
