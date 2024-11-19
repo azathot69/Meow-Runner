@@ -42,7 +42,7 @@ public class PlayerScript : MonoBehaviour
     public float deathYLevel = -10f;
     [SerializeField]
     private Vector3 startPos;
-    private bool hasDied = false;
+    //private bool hasDied = false;
 
     [Header("Movement State")]
     public movementState state;
@@ -142,7 +142,7 @@ public class PlayerScript : MonoBehaviour
 
         if (transform.position.y <= deathYLevel)
         {
-            hasDied = true;
+            //hasDied = true;
             Respawn();
         }
     }
@@ -154,6 +154,10 @@ public class PlayerScript : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "enemy")
+        {
+            Respawn();
+        }
+        if (collision.gameObject.tag == "bullet")
         {
             Respawn();
         }

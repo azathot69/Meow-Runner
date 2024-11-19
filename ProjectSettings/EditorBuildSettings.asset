@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Joahan's dupe.unity
     guid: cef989b6c02b88f43ad33835a0c81ed7
+  - enabled: 1
+    path: Assets/Scenes/Joahan's level 2.unity
+    guid: 62e9ed81ca0fe724c81ec655dad848cc
   m_configObjects: {}

@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7042658593798921815}
   - component: {fileID: 6691073570811814255}
   - component: {fileID: 4603271875607753964}
-  m_Layer: 0
+  - component: {fileID: 543312852400683505}
+  m_Layer: 6
   m_Name: Spinning_Platforms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.195, y: 0.019539684, z: -0.185}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3130875460629759591}
@@ -87,6 +88,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &543312852400683505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668523017385619020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc2e651b9a60014aaafd61d98cec200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinDirection: {x: 0, y: 5, z: 0}
+  spinSpeed: 5
 --- !u!1 &1993684238314649178
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3130875460629759591}
   - component: {fileID: 9106187738390330615}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6463119742035928036}
   - component: {fileID: 269272041580588508}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7243226468723823263}
   - component: {fileID: 5712108318911354196}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1839134153527703538}
   - component: {fileID: 4355295621861184867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
