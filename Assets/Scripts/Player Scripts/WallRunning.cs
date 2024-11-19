@@ -32,6 +32,8 @@ public class WallRunning : MonoBehaviour
     private PlayerScript pm;
     private Rigidbody rb;
 
+    public float mag;
+
 
     #endregion
 
@@ -69,8 +71,6 @@ public class WallRunning : MonoBehaviour
     {
         wallRight = Physics.Raycast(transform.position, Vector3.right, out rightWallhit, wallCheckDistance, whatIsWall);
         wallLeft = Physics.Raycast(transform.position, -Vector3.right, out rightWallhit, wallCheckDistance, whatIsWall);
-        Debug.DrawRay(transform.position, Vector3.right, Color.blue);
-        Debug.DrawRay(transform.position, -Vector3.right, Color.blue);
     }
 
     private bool AboveGround()
@@ -138,7 +138,7 @@ public class WallRunning : MonoBehaviour
         rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
 
         if (!(wallLeft && horizontalInput > 0) && !(wallRight && horizontalInput < 0))
-            rb.AddForce(-wallNormal * 100, ForceMode.Force);
+            rb.AddForce(-wallNormal * mag, ForceMode.Force);
     }
 
     private void StopWallRun()
