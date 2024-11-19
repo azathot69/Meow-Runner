@@ -3837,9 +3837,17 @@ PrefabInstance:
       value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 2398267193852166659, guid: 32bf6d86d9ad04246bf74aa426f63415, type: 3}
+      propertyPath: lives
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398267193852166659, guid: 32bf6d86d9ad04246bf74aa426f63415, type: 3}
       propertyPath: livesText
       value: 
       objectReference: {fileID: 1365529035}
+    - target: {fileID: 2398267193852166659, guid: 32bf6d86d9ad04246bf74aa426f63415, type: 3}
+      propertyPath: playerHeight
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7479879947334198203, guid: 32bf6d86d9ad04246bf74aa426f63415, type: 3}
       propertyPath: m_Name
       value: PlayerV3
