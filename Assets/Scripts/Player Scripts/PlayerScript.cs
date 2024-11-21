@@ -153,13 +153,24 @@ public class PlayerScript : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "enemy")
+        switch (collision.gameObject.tag)
         {
-            Respawn();
+            case "bullet":
+                Respawn();
+                break;
         }
-        if (collision.gameObject.tag == "bullet")
+
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
         {
-            Respawn();
+            case "enemy":
+                Respawn();
+                
+                break;
         }
     }
 
