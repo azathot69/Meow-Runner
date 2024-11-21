@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
+
 public class EnemyFollow : MonoBehaviour
 {
     #region Variables
@@ -15,15 +17,16 @@ public class EnemyFollow : MonoBehaviour
 
     SphereCollider myCollider;
 
-    [SerializeField]
-    private behaveState state;
-    private Transform startingPos;
-
     public enum behaveState
     {
         STAY,
         CHASE
     }
+
+    public behaveState state;
+    private Transform startingPos;
+
+    
 
     //Range of Notice
     #endregion
@@ -60,10 +63,12 @@ public class EnemyFollow : MonoBehaviour
 
             case behaveState.STAY:
                 //Don't Do anything. Default state
+                myCollider.radius = detectionRadius;
                 break;
 
             case behaveState.CHASE:
                 rb.transform.position = Vector3.MoveTowards(this.transform.position,target.position, enemySpeed * Time.deltaTime);
+                myCollider.radius = detectionRadius * 2;
                 break;  
         }
     }
@@ -74,6 +79,15 @@ public class EnemyFollow : MonoBehaviour
         {
             state = behaveState.CHASE;
         }
+
+
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player" && state == behaveState.CHASE)
+        {
+            state = behaveState.STAY;
+        }
+    }
 }

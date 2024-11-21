@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+
 //using UnityEditor.UI;
 using UnityEngine;
 
@@ -8,8 +10,9 @@ public class Enemy : MonoBehaviour
     #region Variables
     [Header("References")]
     private int HP;
-
+    private EnemyFollow script;
     #endregion
+
 
     /// <summary>
     /// Lose HP when hit
@@ -23,6 +26,16 @@ public class Enemy : MonoBehaviour
         else {
             //If no HP left, deactivate
             Die();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "player":
+                
+                break;
         }
     }
 
