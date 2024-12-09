@@ -694,15 +694,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5115450599535452395, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.042100567
+      value: 0.04210057
       objectReference: {fileID: 0}
     - target: {fileID: 5115450599535452395, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -3.9373797e-19
+      value: -0.0000000037219878
       objectReference: {fileID: 0}
     - target: {fileID: 5115450599535452395, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -4.8186215e-18
+      value: 1.5683686e-10
       objectReference: {fileID: 0}
     - target: {fileID: 5358974215006854921, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4112,6 +4112,10 @@ PrefabInstance:
       value: 323
       objectReference: {fileID: 0}
     - target: {fileID: 2982817012477958655, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
+      propertyPath: jumpDelay
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982817012477958655, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
       propertyPath: jumpForce
       value: 15
       objectReference: {fileID: 0}
@@ -4126,6 +4130,10 @@ PrefabInstance:
     - target: {fileID: 2982817012477958655, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
       propertyPath: climbingScript
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982817012477958655, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
+      propertyPath: jumpDelayTimer
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5274206320260916236, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
       propertyPath: exitWallTime

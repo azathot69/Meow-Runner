@@ -29,6 +29,9 @@ public class PlayerScript : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+    public float jumpDelayTimer;
+    private float jumpDelay;
+    private bool lingerJump;
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
@@ -104,6 +107,7 @@ public class PlayerScript : MonoBehaviour
         jumpAction = playerInput.actions.FindAction("Jump");
         sprintAction = playerInput.actions.FindAction("Sprint");
 
+        jumpDelay = jumpDelayTimer;
 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -129,6 +133,9 @@ public class PlayerScript : MonoBehaviour
         if (grounded)
         {
             rb.drag = groundDrag;
+
+            //Reset jump delay when grounded
+            if (jumpDelay <= jumpDelayTimer) jumpDelay = jumpDelayTimer;
         }
         else
         {
@@ -144,6 +151,19 @@ public class PlayerScript : MonoBehaviour
         {
             //hasDied = true;
             Respawn();
+        }
+
+        if (!grounded)
+        {
+            jumpDelay--;
+        }
+        if (jumpDelay > 0)
+        {
+            lingerJump = true;
+        }
+        else
+        {
+            lingerJump = false;
         }
     }
 
@@ -181,7 +201,7 @@ public class PlayerScript : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //When to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && lingerJump)
         {
             
             readyToJump = false;
