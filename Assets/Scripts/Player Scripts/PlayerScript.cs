@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 //using static UnityEditor.Timeline.TimelinePlaybackControls;
 using TMPro;
 using Unity.VisualScripting;
+using static UnityEditorInternal.VersionControl.ListControl;
 
 /// <summary>
 /// Dictates Player Behavior
@@ -17,6 +18,7 @@ public class PlayerScript : MonoBehaviour
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction sprintAction;
+    public bool wasOnTheGround = false;
 
     public bool wallRun;
 
@@ -30,8 +32,12 @@ public class PlayerScript : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     public float jumpDelayTimer;
+    public float jumpDelayTimerTemp = .1f;
+    public float jumpDelayTimerReal = .1f;
     private float jumpDelay;
     private bool lingerJump;
+    private float groundTimer;
+    public float groundTimerAmount = 15;
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
@@ -49,6 +55,7 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Movement State")]
     public movementState state;
+
 
     public enum movementState
     {
@@ -113,6 +120,9 @@ public class PlayerScript : MonoBehaviour
         rb.freezeRotation = true;
 
         startPos = rb.position;
+
+        jumpDelayTimerReal = jumpDelayTimer;
+        groundTimer = groundTimerAmount;
     }
 
 
@@ -134,7 +144,10 @@ public class PlayerScript : MonoBehaviour
         {
             rb.drag = groundDrag;
 
+          
+
             //Reset jump delay when grounded
+            if (groundTimer <= groundTimerAmount) groundTimer = groundTimerAmount;
             if (jumpDelay <= jumpDelayTimer) jumpDelay = jumpDelayTimer;
         }
         else
@@ -157,7 +170,9 @@ public class PlayerScript : MonoBehaviour
         {
             jumpDelay--;
         }
-        if (jumpDelay > 0)
+
+
+        if (jumpDelay > 0 && !wasOnTheGround)
         {
             lingerJump = true;
         }
@@ -203,24 +218,27 @@ public class PlayerScript : MonoBehaviour
         //When to jump
         if (Input.GetKey(jumpKey) && readyToJump && lingerJump)
         {
-            
+            if (grounded) wasOnTheGround = true;
+
             readyToJump = false;
 
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
-            
-        }
 
-        
+
+        }
     }
 
     //Handle the different states of the player
     public void StateHandler()
     {
+
+
         // Mode - Wall Run
         if (wallRun)
         {
+
             state = movementState.WALLRUN;
             moveSpeed = wallRunSpeed;
         }
@@ -228,6 +246,7 @@ public class PlayerScript : MonoBehaviour
         // Sprinting
         else if (grounded && (Input.GetKey(sprintKeyL) || Input.GetKey(sprintKeyR)))
         {
+
             state = movementState.SPRINT;
             moveSpeed = sprintSpeed;
         }
@@ -235,8 +254,10 @@ public class PlayerScript : MonoBehaviour
         //Walking
         else if (grounded)
         {
+
             state = movementState.WALK;
             moveSpeed = playerSpeed;
+
         }
 
         //In the Air
@@ -251,17 +272,6 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     public void MovePlayer()
     {
-
-        //Calculate Movement Direction
-        /*
-        var input = moveAction.ReadValue<Vector2>();
-        
-        moveDirection.x = input.x;
-        moveDirection.z = input.y;
-
-        moveDirection.Normalize();
-        */
-
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         //if On Slope
@@ -280,6 +290,7 @@ public class PlayerScript : MonoBehaviour
         if (grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
 
         }else if (!grounded)
         {
@@ -312,17 +323,6 @@ public class PlayerScript : MonoBehaviour
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
-        /*
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        //Limit Velocity if needed
-        if (flatVel.magnitude > moveSpeed)
-        {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
-
-        }
-        */
     }
 
     /// <summary>
@@ -338,8 +338,6 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-
-        //rb.AddForce(Vector3.down * 5, ForceMode.Force);
     }
 
     /// <summary>
@@ -349,6 +347,7 @@ public class PlayerScript : MonoBehaviour
     {
         exitingSlope = false;
         readyToJump = true;
+        wasOnTheGround = false;
     }
 
     private void Respawn()
