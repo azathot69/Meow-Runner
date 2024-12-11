@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 5274206320260916236}
   - component: {fileID: 818316618415937257}
   - component: {fileID: 1009068114868858221}
+  - component: {fileID: 855240825449150156}
   m_Layer: 0
   m_Name: PlayerV4
   m_TagString: Player
@@ -363,13 +364,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf47617f24e45e4fbef65a5b763deaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  climbingScript: {fileID: 0}
-  climbing: 0
   wallRun: 0
   livesText: {fileID: 0}
   jumpForce: 30
   jumpCooldown: 0.25
   airMultiplier: 0.4
+  jumpDelayTimer: 0
   maxSlopeAngle: 40
   exitingSlope: 0
   ImOnSlope: 0
@@ -420,6 +420,7 @@ MonoBehaviour:
   wallRight: 0
   orientation: {fileID: 7587080300351876831}
   pm: {fileID: 2982817012477958655}
+  mag: 0
   WallJumpUp: 12
   WallJumpSide: 13
   jumpKey: 32
@@ -442,10 +443,9 @@ MonoBehaviour:
   whatIsSwing:
     serializedVersion: 2
     m_Bits: 512
-  firstObject: {fileID: 5543131040216176884}
-  secondObject: {fileID: 0}
   swingSpeed: 0
   swingForce: 10
+  jumpForce: 0
   swinging: 0
   detectionLength: 0
   sphereCastRadius: 0
@@ -466,3 +466,11 @@ MonoBehaviour:
   attackAction: 122
   atkCoolDown: 0.5
   attackHitBox: {fileID: 5924823059698644186}
+--- !u!81 &855240825449150156
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7936920098769322975}
+  m_Enabled: 1

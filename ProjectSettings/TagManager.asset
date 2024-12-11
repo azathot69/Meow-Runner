@@ -9,6 +9,7 @@ TagManager:
   - bullet
   - enemy
   - playerAttack
+  - GameMusic
   layers:
   - Default
   - TransparentFX
