@@ -3102,6 +3102,10 @@ PrefabInstance:
       propertyPath: livesText
       value: 
       objectReference: {fileID: 1365529035}
+    - target: {fileID: 2982817012477958655, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
+      propertyPath: jumpDelayTimer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5274206320260916236, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
       propertyPath: WallJumpUp
       value: 13
