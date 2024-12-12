@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 818316618415937257}
   - component: {fileID: 1009068114868858221}
   - component: {fileID: 855240825449150156}
+  - component: {fileID: -4936363286183545982}
   m_Layer: 0
   m_Name: PlayerV4
   m_TagString: Player
@@ -364,12 +365,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf47617f24e45e4fbef65a5b763deaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wasOnTheGround: 0
   wallRun: 0
   livesText: {fileID: 0}
   jumpForce: 30
   jumpCooldown: 0.25
   airMultiplier: 0.4
   jumpDelayTimer: 0
+  jumpDelayTimerTemp: 0.1
+  jumpDelayTimerReal: 0.1
+  groundTimerAmount: 15
   maxSlopeAngle: 40
   exitingSlope: 0
   ImOnSlope: 0
@@ -474,3 +479,15 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7936920098769322975}
   m_Enabled: 1
+--- !u!114 &-4936363286183545982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7936920098769322975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030f0deb2db52774a9b37a16509a11a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
