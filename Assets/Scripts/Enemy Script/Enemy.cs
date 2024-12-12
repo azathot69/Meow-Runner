@@ -29,15 +29,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        switch (collision.gameObject.tag)
-        {
-            case "player":
-                
-                break;
-        }
-    }
+
 
     /// <summary>
     /// Deactivate self
