@@ -10,13 +10,13 @@ public class Dodge : MonoBehaviour
 
     public float dodgeSpeed;
 
-    public KeyCode dodgeAction = KeyCode.Mouse1;
+    private KeyCode dodgeAction = KeyCode.Mouse1;
 
     public float dodgeCooldown;
 
     private float countDown;
     public float countDownMax;
-    public bool stratCountdown;
+    private bool stratCountdown;
 
     [Header("References")]
     private PlayerScript pm;
