@@ -70,6 +70,8 @@ public class EnemyFollow : MonoBehaviour
 
     private void Update()
     {
+        
+
         StateMachine();
     }
 
@@ -92,6 +94,8 @@ public class EnemyFollow : MonoBehaviour
             case behaveState.CHASE:
                 //Check if Player is in attacking range
                 if (distFromPlayer <= attackRange) state = behaveState.ATTACK;
+
+                
 
                 //attackHitBox.SetActive(false);
 

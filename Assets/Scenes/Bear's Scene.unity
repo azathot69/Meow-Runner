@@ -694,15 +694,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5115450599535452395, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.04210057
+      value: 0.042100567
       objectReference: {fileID: 0}
     - target: {fileID: 5115450599535452395, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000037219878
+      value: 3.9373797e-19
       objectReference: {fileID: 0}
     - target: {fileID: 5115450599535452395, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.5683686e-10
+      value: 4.8186215e-18
       objectReference: {fileID: 0}
     - target: {fileID: 5358974215006854921, guid: 1b54f20badfd22c4183d58c6fc45b4ba, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1267,7 +1267,7 @@ Transform:
   m_GameObject: {fileID: 958421544}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4117699, y: 0, z: 67.05672}
+  m_LocalPosition: {x: -0.5, y: 0, z: 65.4}
   m_LocalScale: {x: 39.58, y: 0.21004638, z: 102.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3794,7 +3794,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 111185977726311013, guid: dd43c8c2316d93d49be1a15b67f3ffb5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6
+      value: 10.7
       objectReference: {fileID: 0}
     - target: {fileID: 111185977726311013, guid: dd43c8c2316d93d49be1a15b67f3ffb5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3802,7 +3802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 111185977726311013, guid: dd43c8c2316d93d49be1a15b67f3ffb5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -45.2
+      value: 12.8
       objectReference: {fileID: 0}
     - target: {fileID: 111185977726311013, guid: dd43c8c2316d93d49be1a15b67f3ffb5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3832,6 +3832,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 436999119177801275, guid: dd43c8c2316d93d49be1a15b67f3ffb5, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 613715286274479270, guid: dd43c8c2316d93d49be1a15b67f3ffb5, type: 3}
       propertyPath: m_Height
       value: 1.95
@@ -3856,6 +3860,10 @@ PrefabInstance:
       propertyPath: attackBufferTimer
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1601394247165583501, guid: dd43c8c2316d93d49be1a15b67f3ffb5, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 8379031919539455501}
     - target: {fileID: 3592186903846215337, guid: dd43c8c2316d93d49be1a15b67f3ffb5, type: 3}
       propertyPath: m_Name
       value: Enemy
