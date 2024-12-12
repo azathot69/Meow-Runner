@@ -117,7 +117,7 @@ public class Climbing : MonoBehaviour
 
     }
 
-    /*
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Wall")
@@ -131,7 +131,7 @@ public class Climbing : MonoBehaviour
 
         wallFront = Physics.SphereCast(transform.position, sphereCastRadius, transform.forward, out frontWallHit, detectionLength, whatIsWall);
 
-        //bool newWall = collision.gameObject.transform != lastWall || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > miniWallNormalAngleChange;
+        bool newWall = collision.gameObject.transform != lastWall || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > miniWallNormalAngleChange;
 
         if ((wallFront) || pm.grounded)
         {
@@ -139,7 +139,7 @@ public class Climbing : MonoBehaviour
             climbJumpsLeft = climbJumps;
         }
     }
-    */
+    
     #region Climb Up Walls
 
     private void StartClimbing()

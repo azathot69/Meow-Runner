@@ -389,7 +389,7 @@ public class PlayerScript : MonoBehaviour
             {
                 ImOnSlope = false;
             }
-            //Debug.Log("Angle: " + angle);
+
             return angle < maxSlopeAngle && angle != 0;
         }
         ImOnSlope = false;

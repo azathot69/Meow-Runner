@@ -34,7 +34,7 @@ public class Attack : MonoBehaviour
 
     private void AttackInput()
     {
-        if (Input.GetKey(attackAction) && canAttack)
+        if (Input.GetKeyDown(attackAction) && canAttack)
         {
             canAttack = false;
 

@@ -104,7 +104,7 @@ public class EnemyFollow : MonoBehaviour
 
                 //Get Distance from Player
                 distFromPlayer = Vector3.Distance(target.position, transform.position);
-                Debug.Log("Distance From Player: " + distFromPlayer);
+
 
                 
                 
