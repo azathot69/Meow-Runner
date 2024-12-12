@@ -55,7 +55,7 @@ public class Dodge : MonoBehaviour
                 //Reset Variables
                 pm.invincible = false;
                 rb.useGravity = true;
-                canDodge = true;
+                Invoke(nameof(DodgeReset), dodgeCooldown);
             }
         }
     }
@@ -67,6 +67,7 @@ public class Dodge : MonoBehaviour
     {
         if (Input.GetKeyDown(dodgeAction) && canDodge)
         {
+            canDodge = false;
             stratCountdown = true;
             PlayerDodge();
         }
@@ -91,8 +92,7 @@ public class Dodge : MonoBehaviour
 
     private void DodgeReset()
     {
-        pm.invincible = false;
-        rb.useGravity = true;
+        
         canDodge = true;
     }
 }
