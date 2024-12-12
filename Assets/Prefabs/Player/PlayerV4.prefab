@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 818316618415937257}
   - component: {fileID: 1009068114868858221}
   - component: {fileID: 855240825449150156}
-  - component: {fileID: -4936363286183545982}
+  - component: {fileID: -8256081824602595525}
   m_Layer: 0
   m_Name: PlayerV4
   m_TagString: Player
@@ -366,8 +366,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wasOnTheGround: 0
+  invincible: 0
   wallRun: 0
   livesText: {fileID: 0}
+  dodge: 0
   jumpForce: 30
   jumpCooldown: 0.25
   airMultiplier: 0.4
@@ -386,6 +388,7 @@ MonoBehaviour:
   sprintSpeed: 24
   climbSpeed: 200
   wallRunSpeed: 30
+  dodgeSpeed: 1000
   moveSpeed: 12
   groundDrag: 3
   readyToJump: 1
@@ -479,7 +482,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7936920098769322975}
   m_Enabled: 1
---- !u!114 &-4936363286183545982
+--- !u!114 &-8256081824602595525
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -488,6 +491,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7936920098769322975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 030f0deb2db52774a9b37a16509a11a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e0c884bd19223042ac8227c2bd05351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDodge: 0
+  dodgeCoolDownTimer: 0
+  dodgeCoolDown: 0
+  dodgeAction: 324
