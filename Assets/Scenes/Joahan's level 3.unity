@@ -1117,8 +1117,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1361906539}
     m_Modifications:
     - target: {fileID: -8256081824602595525, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
+      propertyPath: canDodge
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8256081824602595525, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
       propertyPath: dodgeSpeed
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: -8256081824602595525, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
       propertyPath: orientation
@@ -1126,7 +1130,7 @@ PrefabInstance:
       objectReference: {fileID: 2130788527}
     - target: {fileID: -8256081824602595525, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
       propertyPath: countDownMax
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8256081824602595525, guid: 6c9ac0454db91404693ce8be16e6620f, type: 3}
       propertyPath: dodgeCooldown
