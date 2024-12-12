@@ -10,9 +10,17 @@ public class MainMenu : MonoBehaviour
 
 	public GameObject pauseMenuUI;
 
-	public void OnPlayButton ()
+	public void OnLevel1()
     {
         SceneManager.LoadScene(1);
+    }
+    public void OnLevel2()
+    {
+        SceneManager.LoadScene(2);
+    }
+    public void OnLevel3()
+    {
+        SceneManager.LoadScene(3);
     }
 
     public void OnQuitButton ()

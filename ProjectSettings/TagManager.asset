@@ -13,6 +13,8 @@ TagManager:
   - CatFood
   - SilverKey
   - SilverDoor
+  - SilverKey2
+  - SilverDoor2
   layers:
   - Default
   - TransparentFX

@@ -6,7 +6,10 @@ using UnityEngine.UIElements;
 public class PInteract : MonoBehaviour
 {
     public GameObject SilverDoor;
+    public GameObject SilverDoor2;
     public int silverKeysCollected = 0;
+    public int silverKeys2Collected = 0;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,18 +19,11 @@ public class PInteract : MonoBehaviour
             other.gameObject.SetActive(false);
         }
 
-        /*
-        if (other.gameObject.tag == "SilverDoor")
+        if (other.gameObject.tag == "SilverKey2")
         {
-            Door collidedDoor = other.gameObject.GetComponent<Door>();
-
-            if (silverKeysCollected >= collidedDoor.silverKeysNeeded)
-            {
-                silverKeysCollected -= collidedDoor.silverKeysNeeded;
-                other.gameObject.SetActive(false);
-            }
+            silverKeys2Collected++;
+            other.gameObject.SetActive(false);
         }
-        */
     }
 
     private void Update()
@@ -45,6 +41,11 @@ public class PInteract : MonoBehaviour
         {
             //Destroy(SilverDoor);
             SilverDoor.SetActive(false);
+        }
+        if (silverKeys2Collected >= 2)
+        {
+            //Destroy(SilverDoor);
+            SilverDoor2.SetActive(false);
         }
     }
 
