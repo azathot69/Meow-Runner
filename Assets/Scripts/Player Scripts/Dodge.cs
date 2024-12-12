@@ -45,14 +45,17 @@ public class Dodge : MonoBehaviour
             if (countDown > 0) countDown -= Time.deltaTime;
             if (countDown <= 0)
             {
+                stratCountdown = false;
                 canDodge = false;
 
+                
+
+                
                 countDown = countDownMax;
-
-                stratCountdown = false;
-
                 //Reset Variables
-                Invoke(nameof(DodgeReset), dodgeCooldown);
+                pm.invincible = false;
+                rb.useGravity = true;
+                canDodge = true;
             }
         }
     }
