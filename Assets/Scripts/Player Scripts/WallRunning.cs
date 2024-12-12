@@ -122,7 +122,7 @@ public class WallRunning : MonoBehaviour
 
     private void WallRunningMovement()
     {
-        Debug.Log("Now Your wall Running!");
+
 
         rb.useGravity = false;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);

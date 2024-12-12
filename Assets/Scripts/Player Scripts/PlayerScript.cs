@@ -20,10 +20,16 @@ public class PlayerScript : MonoBehaviour
     InputAction sprintAction;
     public bool wasOnTheGround = false;
 
+    [SerializeField]
+    public bool invincible = false;
+
     public bool wallRun;
 
     [Header("UI")]
     [SerializeField] private TMP_Text livesText;
+
+    public bool dodge = false;
+
     
 
     [Header("Jumping")]
@@ -61,19 +67,19 @@ public class PlayerScript : MonoBehaviour
     {
         WALK,
         SPRINT,
+        DODGE,
         AIR,
         CLIMB,
         WALLRUN
     }
 
     //Variables
-
-    
     [Header("Movement")]
     public float playerSpeed = 2;
     public float sprintSpeed = 5;
     public float climbSpeed = 2;
     public float wallRunSpeed = 2;
+    public float dodgeSpeed = 1000;
     public float moveSpeed;
     public float groundDrag;
 
@@ -191,6 +197,7 @@ public class PlayerScript : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "bullet":
+                if (invincible) return;
                 Respawn();
                 break;
         }
@@ -203,6 +210,7 @@ public class PlayerScript : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "enemy":
+                if (invincible) return;
                 Respawn();
                 
                 break;
@@ -228,12 +236,14 @@ public class PlayerScript : MonoBehaviour
 
 
         }
+
+
+
     }
 
     //Handle the different states of the player
     public void StateHandler()
     {
-
 
         // Mode - Wall Run
         if (wallRun)
@@ -258,6 +268,10 @@ public class PlayerScript : MonoBehaviour
             state = movementState.WALK;
             moveSpeed = playerSpeed;
 
+        }else if (dodge)
+        {
+            state = movementState.DODGE;
+            moveSpeed = dodgeSpeed;
         }
 
         //In the Air
