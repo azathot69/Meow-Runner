@@ -17,6 +17,7 @@ public class EnemyFollow : MonoBehaviour
     [Header("Attack")]
     public float distFromPlayer;
     public bool canAttack = false;
+    public GameObject attackHitBox;
 
     //Desired Attacking Distance
     public float attackRange;
@@ -55,6 +56,9 @@ public class EnemyFollow : MonoBehaviour
         //Sphere Collider
         myCollider = GetComponent<SphereCollider>();
 
+        attackHitBox.SetActive(false);
+
+
         if (myCollider != null)
         {
             myCollider.radius = detectionRadius;
@@ -88,6 +92,8 @@ public class EnemyFollow : MonoBehaviour
             case behaveState.CHASE:
                 //Check if Player is in attacking range
                 if (distFromPlayer <= attackRange) state = behaveState.ATTACK;
+
+                //attackHitBox.SetActive(false);
 
                 rb.transform.position = Vector3.MoveTowards(this.transform.position,target.position, enemySpeed * Time.deltaTime);
                 myCollider.radius = detectionRadius * 2;
@@ -128,7 +134,7 @@ public class EnemyFollow : MonoBehaviour
     private void EnemyAttack()
     {
         //Summon Attack
-        Debug.Log("I'm Attacking!");
+        attackHitBox.SetActive(true);
 
         //Set Attack Cooldown
         canAttack = false;
@@ -138,13 +144,14 @@ public class EnemyFollow : MonoBehaviour
 
         state = behaveState.CHASE;
 
+        Invoke(nameof(BufferAttackReset), attackBuffer);
+
     }
 
 
     private void BufferAttackReset()
     {
-        canAttack = true;
-        attackBuffer = attackBufferTimer;
+        attackHitBox.SetActive(false);
     }
 
     /// <summary>
