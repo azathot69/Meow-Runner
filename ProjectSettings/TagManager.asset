@@ -11,6 +11,8 @@ TagManager:
   - playerAttack
   - GameMusic
   - CatFood
+  - SilverKey
+  - SilverDoor
   layers:
   - Default
   - TransparentFX
