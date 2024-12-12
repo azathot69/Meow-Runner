@@ -66,11 +66,11 @@ public class Climbing : MonoBehaviour
         if (exitWallTimer > 0) exitWallTimer -= Time.deltaTime;
         if (exitWallTimer < 0) exitingWall = false;
 
-        //StateMachine();
+        StateMachine();
 
         //if (climbing && !exitingWall) Debug.Log("Climbing!");
 
-        //if (climbing && !exitingWall) ClimbingMovement();
+        if (climbing && !exitingWall) ClimbingMovement();
     }
 
     private void StateMachine()
